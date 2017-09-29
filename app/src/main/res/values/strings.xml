@@ -1,3 +1,34 @@
 <resources>
     <string name="app_name">InterAndroid</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="Login">Login</string>
+    <string name="LoginFace">Login com o Facebook</string>
+    <string name="Cadastrar">Cadastrar</string>
+    <string name="Produzido">Desenvolvido por Jean Pierre e José Renato</string>
+    <string name="PNome">Primeiro Nome</string>
+    <string name="SNome">Sobrenome</string>
+    <string name="CEP">CEP</string>
+    <string name="Endereco">Endereço</string>
+    <string name="Numero">Numero</string>
+    <string name="Complemento">Complemento</string>
+    <string name="Bairro">Bairro</string>
+    <string name="Cidade">Cidade</string>
+    <string name="Estado">Estado</string>
+    <string name="Pais">Pais</string>
+    <string name="Telefone">Telefone</string>
+    <string name="Celular">Celular</string>
+    <string name="Sexo">Sexo</string>
+    <string name="Masculino">Masculino</string>
+    <string name="Feminino">Feminino</string>
+    <string name="NomeEmpresa">Nome da Empresa</string>
+    <string name="NomeProprietario">Nome Proprietario</string>
+    <string name="Agendar">Agendar</string>
+    <string name="Avaliar">Avaliar</string>
+    <string name="Avaliar2">Av2aliar</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="Empresa">Empresa</string>
+    <string name="Cliente">Cliente</string>
+
+
 </resources>

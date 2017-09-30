@@ -22,10 +22,10 @@
     <string name="Masculino">Masculino</string>
     <string name="Feminino">Feminino</string>
     <string name="NomeEmpresa">Nome da Empresa</string>
-    <string name="NomeProprietario">Nome Proprietario</string>
+    <string name="NomeProprietario">Nome Proprietário</string>
     <string name="Agendar">Agendar</string>
     <string name="Avaliar">Avaliar</string>
-    <string name="Avaliar2">Av2aliar</string>
+    <string name="Avaliar2">Avaliar2</string>
     <string name="title_activity_maps">Map</string>
     <string name="Empresa">Empresa</string>
     <string name="Cliente">Cliente</string>

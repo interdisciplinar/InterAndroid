@@ -2,7 +2,6 @@ package interdisciplinar.com.br.interandroid;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -39,8 +38,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng unifebe = new LatLng(-27.0684183, -48.8850456);
+        mMap.addMarker(new MarkerOptions().position(unifebe).title("UNIFEBE"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(unifebe));
     }
 }

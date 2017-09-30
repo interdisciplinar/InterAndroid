@@ -99,4 +99,6 @@ android:orientation="vertical">
             android:text="@string/Produzido"
             />
     </LinearLayout>
+
+
 </android.support.v7.widget.LinearLayoutCompat>

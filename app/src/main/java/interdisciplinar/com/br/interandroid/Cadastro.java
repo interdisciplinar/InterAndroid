@@ -32,7 +32,7 @@ public class Cadastro extends AppCompatActivity {
                         startActivity(i);
                     }
                     if (!Cliente.isChecked() && !Empresa.isChecked()) {
-                        Toast.makeText(getApplicationContext(), "Nenhum foi pressionado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Nenhum perfil foi selecionado", Toast.LENGTH_SHORT).show();
 
                     }
 

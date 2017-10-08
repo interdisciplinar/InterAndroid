@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText Senha;
     private String StringEmail = "";
     private String StringSenha = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

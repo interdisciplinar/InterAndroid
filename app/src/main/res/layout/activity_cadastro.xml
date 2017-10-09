@@ -30,10 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="12"
-                android:inputType="textEmailAddress"
-                android:textAlignment="center"
-
-                />
+                android:inputType="textEmailAddress" />
 
         </LinearLayout>
 
@@ -100,7 +97,6 @@
                     android:id="@+id/rbCliente"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:text="@string/Cliente" />
 
                 <RadioButton

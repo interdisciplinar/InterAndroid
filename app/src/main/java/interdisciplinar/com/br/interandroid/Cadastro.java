@@ -14,7 +14,7 @@ public class Cadastro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cadastro);
+        setContentView(R.layout.activity_cadastro);
 
         Cliente = (RadioButton)findViewById(R.id.rbCliente);
         Empresa = (RadioButton)findViewById(R.id.rbEmpresa);

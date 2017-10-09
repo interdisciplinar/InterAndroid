@@ -1,64 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Fundo_Branco">
+    android:background="@color/Fundo_Branco"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/NomeEmpresa"
         android:textSize="@dimen/txtNameValue" />
+
     <EditText
         android:id="@+id/txtNomeEmpresa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
         android:layout_marginTop="-12dp"
-        />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/NomeProprietario"
-        android:textSize="@dimen/txtNameValue"
-        />
+        android:textSize="@dimen/txtNameValue" />
+
     <EditText
         android:id="@+id/txtNomeProprietario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-12dp"
-        android:inputType="text"
-        />
+        android:inputType="text" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/email"
-        android:textSize="@dimen/txtNameValue"
-        />
+        android:textSize="@dimen/txtNameValue" />
+
     <EditText
         android:id="@+id/txtEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-12dp"
-        android:inputType="textEmailAddress"
-        />
+        android:inputType="textEmailAddress" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/senha"
-        android:textSize="@dimen/txtNameValue"
-        />
+        android:textSize="@dimen/txtNameValue" />
+
     <EditText
         android:id="@+id/txtSenha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-12dp"
-        android:inputType="textPassword"
-        />
+        android:inputType="textPassword" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,69 +65,69 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Telefone"
-                android:textSize="@dimen/txtNameValue"
-                />
+                android:textSize="@dimen/txtNameValue" />
+
             <EditText
                 android:id="@+id/txtTelefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-12dp"
-                android:inputType="text"
-                />
+                android:inputType="text" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Celular"
-                android:textSize="@dimen/txtNameValue"
-                />
+                android:textSize="@dimen/txtNameValue" />
+
             <EditText
                 android:id="@+id/txtCelular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
                 android:layout_marginTop="-12dp"
-                />
+                android:inputType="text" />
         </LinearLayout>
     </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/CEP"
-        android:textSize="@dimen/txtNameValue"
-        />
+        android:textSize="@dimen/txtNameValue" />
+
     <EditText
         android:id="@+id/txtCEP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-12dp"
-        android:inputType="number"
-        />
+        android:inputType="number" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Endereco"
-        android:textSize="@dimen/txtNameValue"
-        />
+        android:textSize="@dimen/txtNameValue" />
+
     <EditText
         android:id="@+id/txtEndereco"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-12dp"
-        android:inputType="text"
-        />
+        android:inputType="text" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -139,46 +137,45 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Numero"
-                android:textSize="@dimen/txtNameValue"
-                />
+                android:textSize="@dimen/txtNameValue" />
+
             <EditText
                 android:id="@+id/txtNumero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-12dp"
-                android:inputType="text"
-                />
+                android:inputType="text" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Complemento"
-                android:textSize="@dimen/txtNameValue"
-                />
+                android:textSize="@dimen/txtNameValue" />
+
             <EditText
                 android:id="@+id/txtComplemento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
                 android:layout_marginTop="-12dp"
-                />
+                android:inputType="text" />
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -187,42 +184,44 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Bairro"
-                android:textSize="@dimen/txtNameValue"
-                />
+                android:textSize="@dimen/txtNameValue" />
+
             <EditText
                 android:id="@+id/txtBairro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-12dp"
-                android:inputType="text"
-                />
+                android:inputType="text" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Cidade"
-                android:textSize="@dimen/txtNameValue"
-                />
+                android:textSize="@dimen/txtNameValue" />
+
             <EditText
                 android:id="@+id/txtCidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
                 android:layout_marginTop="-12dp"
-                />
+                android:inputType="text" />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -231,8 +230,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -240,36 +240,38 @@
                 android:textSize="@dimen/txtNameValue"
 
                 />
+
             <EditText
                 android:id="@+id/txtEstado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-12dp"
-                android:maxLength="2"
                 android:inputType="text"
-                />
+                android:maxLength="2" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Pais"
-                android:textSize="@dimen/txtNameValue"
-                />
+                android:textSize="@dimen/txtNameValue" />
+
             <EditText
                 android:id="@+id/txtPais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
                 android:layout_marginTop="-12dp"
-                />
+                android:inputType="text" />
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="25dp"
@@ -278,23 +280,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Sexo"
+            android:text="@string/Sexo" />
 
-            />
-        <RadioButton
-            android:id="@+id/rbMasculino"
+        <RadioGroup
+            android:id="@+id/radioGrupoSexoEmp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/Masculino"
-            android:layout_marginLeft="50dp"
-            />
-        <RadioButton
-            android:id="@+id/rbFeminino"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/Feminino"
-            android:layout_marginLeft="30dp"
-            />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbMasculino"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="50dp"
+                android:text="@string/Masculino" />
+
+            <RadioButton
+                android:id="@+id/rbFeminino"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:text="@string/Feminino" />
+        </RadioGroup>
     </LinearLayout>
 
 </LinearLayout>

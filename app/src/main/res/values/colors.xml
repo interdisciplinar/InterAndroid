@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#FF4081</color>
     <color name="colorAccent">#FF4081</color>
     <color name="Fundo_Branco">#FFFFFF</color>
+    <color name="Fonte">#FF4081</color>
+    <color name="Fonte_Botao">#FFFFFF</color>
 </resources>

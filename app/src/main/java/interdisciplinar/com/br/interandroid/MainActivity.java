@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         Button Login = (Button)findViewById(R.id.btnLogin);
 
         Email = (EditText) findViewById(R.id.txtEmail);
-        Senha = (EditText) findViewById(R.id.txtPWD);
+        Senha = (EditText) findViewById(R.id.txtPWDLogin);
 
 //        StringEmail = (String) Email.getText().toString();
 //        StringSenha = Senha.getText().toString();

@@ -12,68 +12,61 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center_vertical|center_horizontal"
+        android:gravity="center_horizontal|center_vertical"
         android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:text="@string/FacaLogin"
+            android:textAlignment="center"
+            android:textColor="@color/Fonte"
+            android:textSize="@dimen/txtTituloValue" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/email" />
-
-            <EditText
-                android:id="@+id/txtEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="12"
-                android:inputType="textEmailAddress" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:id="@+id/txtEmailLogin"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_marginTop="50dp"
+            android:ems="12"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/Fonte" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/senha" />
+        <EditText
+            android:id="@+id/txtPWDLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacoCampoLogin"
+            android:ems="12"
+            android:hint="@string/senha"
+            android:inputType="textPassword"
+            android:textColor="@color/Fonte" />
 
-            <EditText
-                android:id="@+id/txtPWD"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="12"
-                android:inputType="textPassword" />
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_marginTop="@dimen/espacoCampoLogin"
             android:gravity="center"
             android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnCadastrar"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/Cadastrar" />
 
             <Button
                 android:id="@+id/btnLogin"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
                 android:text="@string/Login" />
+
+            <Button
+                android:id="@+id/btnCadastrar"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="@string/Cadastrar" />
+
         </LinearLayout>
 
         <Button
@@ -81,7 +74,9 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/espacoCampoLogin"
             android:text="@string/LoginFace" />
+
     </LinearLayout>
 
     <LinearLayout

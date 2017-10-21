@@ -29,6 +29,9 @@
     <string name="title_activity_maps">Map</string>
     <string name="Empresa">Empresa</string>
     <string name="Cliente">Cliente</string>
+    <string name="Confirma">Confirmar Senha</string>
+    <string name="FacaLogin">Faça o seu Login</string>
+    <string name="FacaCadastro">Faça o seu Cadastro</string>
 
 
 </resources>

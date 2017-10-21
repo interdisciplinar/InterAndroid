@@ -13,16 +13,18 @@ public class MainActivity extends AppCompatActivity {
     private EditText Senha;
     private String StringEmail = "";
     private String StringSenha = "";
+    private Button Login;
+    private Button Cadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button Login = (Button)findViewById(R.id.btnLogin);
-
-        Email = (EditText) findViewById(R.id.txtEmail);
+        Email = (EditText) findViewById(R.id.txtEmailLogin);
         Senha = (EditText) findViewById(R.id.txtPWDLogin);
+        Login = (Button) findViewById(R.id.btnLogin);
+        Cadastrar = (Button) findViewById(R.id.btnCadastrar);
 
 //        StringEmail = (String) Email.getText().toString();
 //        StringSenha = Senha.getText().toString();
@@ -32,22 +34,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Email: " + StringEmail, Toast.LENGTH_SHORT).show();
 
-                if (Email.getText().toString().equalsIgnoreCase("Renato")){
-                    if (Senha.getText().toString().equals("senha")){
+                if (Email.getText().toString().equalsIgnoreCase("Renato")) {
+                    if (Senha.getText().toString().equals("senha")) {
                         Toast.makeText(getApplicationContext(), "Autenticou", Toast.LENGTH_SHORT).show();
-                    }
-                    else Toast.makeText(getApplicationContext(), "Senha Incorreta", Toast.LENGTH_SHORT).show();
-                }
-                else Toast.makeText(getApplicationContext(), "Email não encontrado", Toast.LENGTH_SHORT).show();
+                    } else
+                        Toast.makeText(getApplicationContext(), "Senha Incorreta", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getApplicationContext(), "Email não encontrado", Toast.LENGTH_SHORT).show();
             }
         });
 
 
-        Button Cadastrar = (Button)findViewById(R.id.btnCadastrar);
         Cadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),Cadastro.class);
+                Intent i = new Intent(getApplicationContext(), Cadastro.class);
                 startActivity(i);
                 finish();
             }

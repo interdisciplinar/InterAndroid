@@ -23,6 +23,7 @@
             android:textColor="@color/Fonte"
             android:textSize="@dimen/txtTituloValue" />
 
+
         <EditText
             android:id="@+id/txtEmailLogin"
             android:layout_width="wrap_content"

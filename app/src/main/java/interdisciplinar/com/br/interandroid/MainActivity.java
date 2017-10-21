@@ -13,8 +13,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText Senha;
     private String StringEmail = "";
     private String StringSenha = "";
-    private Button Login;
-    private Button Cadastrar;
+    private Button botaoLogin;
+    private Button botaoCadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
         Email = (EditText) findViewById(R.id.txtEmailLogin);
         Senha = (EditText) findViewById(R.id.txtPWDLogin);
-        Login = (Button) findViewById(R.id.btnLogin);
-        Cadastrar = (Button) findViewById(R.id.btnCadastrar);
+        botaoLogin = (Button) findViewById(R.id.btnLogin);
+        botaoCadastrar = (Button) findViewById(R.id.btnCadastrar);
 
 //        StringEmail = (String) Email.getText().toString();
 //        StringSenha = Senha.getText().toString();
 
-        Login.setOnClickListener(new View.OnClickListener() {
+        botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "Email: " + StringEmail, Toast.LENGTH_SHORT).show();
@@ -45,11 +45,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        Cadastrar.setOnClickListener(new View.OnClickListener() {
+        botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), Cadastro.class);
-                startActivity(i);
+
+                startActivity(new Intent(MainActivity.this, Cadastro.class));
                 finish();
             }
         });

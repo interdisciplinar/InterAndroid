@@ -9,30 +9,36 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class Cadastro extends AppCompatActivity {
-    private RadioButton Cliente;
-    private RadioButton Empresa;
+
+    private RadioButton cliente;
+    private RadioButton empresa;
+    private Button botaoCadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        Cliente = (RadioButton) findViewById(R.id.rbCliente);
-        Empresa = (RadioButton) findViewById(R.id.rbEmpresa);
+        cliente = (RadioButton) findViewById(R.id.rbCliente);
+        empresa = (RadioButton) findViewById(R.id.rbEmpresa);
+        botaoCadastrar = (Button) findViewById(R.id.btnProximo);
 
-        Button Proximo = (Button) findViewById(R.id.btnProximo);
-        Proximo.setOnClickListener(new View.OnClickListener() {
+        botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Cliente.isChecked()) {
-                    Intent i = new Intent(getApplicationContext(), CadastroCliente.class);
-                    startActivity(i);
+
+                if (cliente.isChecked()) {
+
+                    startActivity(new Intent(Cadastro.this, CadastroCliente.class));
+
                 }
-                if (Empresa.isChecked()) {
-                    Intent i = new Intent(getApplicationContext(), CadastroEmp.class);
-                    startActivity(i);
+                if (empresa.isChecked()) {
+
+                    startActivity(new Intent(Cadastro.this, CadastroEmp.class));
+
                 }
-                if (!Cliente.isChecked() && !Empresa.isChecked()) {
+                if (!cliente.isChecked() && !empresa.isChecked()) {
+
                     Toast.makeText(getApplicationContext(), "Nenhum perfil foi selecionado", Toast.LENGTH_SHORT).show();
 
                 }

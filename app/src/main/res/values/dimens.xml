@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="txtNameValue">12dp</dimen>
+    <dimen name="txtNameValue">12sp</dimen>
     <dimen name="txtTituloValue">20dp</dimen>
     <dimen name="txtValue">14dp</dimen>
     <dimen name="espacoCampoLogin">15dp</dimen>

@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF4081</color>
-    <color name="colorPrimaryDark">#FF4081</color>
+    <color name="colorPrimary">#80DEEA</color>
+    <color name="colorPrimaryDark">#00BCD4</color>
+    <color name="colorAccent">#00BCD4</color>
+    <color name="Fundo_Branco">#FFFFFF</color>
+    <color name="Fonte">#01579B</color>
+    <color name="Fonte_Botao">#FFFFFF</color>
+
+    <!--
+    <color name="colorPrimary">#F48FB1</color>
+    <color name="colorPrimaryDark">#EC407A</color>
     <color name="colorAccent">#FF4081</color>
     <color name="Fundo_Branco">#FFFFFF</color>
-    <color name="Fonte">#FF4081</color>
+    <color name="Fonte">#EC407A</color>
     <color name="Fonte_Botao">#FFFFFF</color>
+    -->
 </resources>

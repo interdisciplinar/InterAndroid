@@ -3,6 +3,9 @@ package interdisciplinar.com.br.interandroid;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     private String StringSenha = "";
     private Button botaoLogin;
     private Button botaoCadastrar;
+    private Toolbar toolbar;
+//    private SlidingTabLayout slidingTabLayout;
+//    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,17 @@ public class MainActivity extends AppCompatActivity {
         Senha = (EditText) findViewById(R.id.txtPWDLogin);
         botaoLogin = (Button) findViewById(R.id.btnLogin);
         botaoCadastrar = (Button) findViewById(R.id.btnCadastrar);
+        toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
+//        slidingTabLayout = (SlidingTabLayout) findViewById(R.id.tabLayout);
+//        viewPager = (ViewPager) findViewById(R.id.vpPagina);
+//
+//        //Configurar adapter
+//        TabAdapterCliente tabAdapter = new TabAdapterCliente(getSupportFragmentManager());
+//        viewPager.setAdapter(tabAdapter);
+//        slidingTabLayout.setViewPager(viewPager);
+//
+        toolbar.setTitle("Título do Aplicativo");
+        setSupportActionBar(toolbar);
 
 //        StringEmail = (String) Email.getText().toString();
 //        StringSenha = Senha.getText().toString();
@@ -54,5 +71,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main,menu);
+        return true;
     }
 }

@@ -32,6 +32,7 @@
     <string name="Confirma">Confirmar Senha</string>
     <string name="FacaLogin">Faça o seu Login</string>
     <string name="FacaCadastro">Faça o seu Cadastro</string>
+    <string name="Sair">Sair</string>
 
 
 </resources>

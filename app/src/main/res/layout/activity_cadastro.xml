@@ -6,11 +6,15 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/toolbarTituloApp"
+        layout="@layout/toolbar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center_horizontal|center_vertical"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView

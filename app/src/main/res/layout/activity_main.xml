@@ -8,6 +8,10 @@
     android:orientation="vertical"
     tools:context="interdisciplinar.com.br.interandroid.MainActivity">
 
+    <include
+        android:id="@+id/toolbarTituloApp"
+        layout="@layout/toolbar" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

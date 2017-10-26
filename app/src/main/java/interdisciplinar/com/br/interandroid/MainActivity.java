@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private Button botaoLogin;
     private Button botaoCadastrar;
     private Toolbar toolbar;
-//    private SlidingTabLayout slidingTabLayout;
-//    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +30,7 @@ public class MainActivity extends AppCompatActivity {
         botaoLogin = (Button) findViewById(R.id.btnLogin);
         botaoCadastrar = (Button) findViewById(R.id.btnCadastrar);
         toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
-//        slidingTabLayout = (SlidingTabLayout) findViewById(R.id.tabLayout);
-//        viewPager = (ViewPager) findViewById(R.id.vpPagina);
-//
-//        //Configurar adapter
-//        TabAdapterCliente tabAdapter = new TabAdapterCliente(getSupportFragmentManager());
-//        viewPager.setAdapter(tabAdapter);
-//        slidingTabLayout.setViewPager(viewPager);
-//
+
         toolbar.setTitle("Título do Aplicativo");
         setSupportActionBar(toolbar);
 

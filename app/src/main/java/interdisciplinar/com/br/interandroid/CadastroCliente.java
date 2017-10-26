@@ -16,7 +16,6 @@ public class CadastroCliente extends AppCompatActivity {
     private Toolbar toolbar;
     private SlidingTabLayout slidingTabLayout;
     private ViewPager viewPager;
- //   private EditText telefone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class CadastroCliente extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
         slidingTabLayout = (SlidingTabLayout) findViewById(R.id.tabLayoutCliente);
         viewPager = (ViewPager) findViewById(R.id.vpPaginaCliente);
-//        telefone = (EditText) findViewById(R.id.txtTelefone);
+
 
         //Configurar adapter
         TabAdapterCliente tabAdapterCliente = new TabAdapterCliente(getSupportFragmentManager());
@@ -36,9 +35,6 @@ public class CadastroCliente extends AppCompatActivity {
         toolbar.setTitle("Cadastro de Clientes");
         setSupportActionBar(toolbar);
 
-//        SimpleMaskFormatter simpleMaskTelefone = new SimpleMaskFormatter("NNNNN-NNNN");
-//        MaskTextWatcher maskTelefone = new MaskTextWatcher(telefone, simpleMaskTelefone);
-//        telefone.addTextChangedListener(maskTelefone);
     }
 
     @Override

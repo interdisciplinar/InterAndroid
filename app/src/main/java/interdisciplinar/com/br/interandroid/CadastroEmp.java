@@ -6,6 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.widget.EditText;
+
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import interdisciplinar.com.br.interandroid.adapter.TabAdapterCliente;
 import interdisciplinar.com.br.interandroid.adapter.TabAdapterEmpresa;
@@ -16,6 +20,7 @@ public class CadastroEmp extends AppCompatActivity {
     private Toolbar toolbar;
     private SlidingTabLayout slidingTabLayout;
     private ViewPager viewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

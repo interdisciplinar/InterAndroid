@@ -22,6 +22,7 @@ public class Cadastro extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+
         toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
         cliente = (RadioButton) findViewById(R.id.rbCliente);
         empresa = (RadioButton) findViewById(R.id.rbEmpresa);
@@ -29,6 +30,8 @@ public class Cadastro extends AppCompatActivity {
 
         toolbar.setTitle("Título do Aplicativo");
         setSupportActionBar(toolbar);
+
+
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override

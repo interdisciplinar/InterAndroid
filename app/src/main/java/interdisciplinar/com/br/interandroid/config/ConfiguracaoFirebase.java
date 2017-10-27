@@ -1,10 +1,19 @@
 package interdisciplinar.com.br.interandroid.config;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public final class ConfiguracaoFirebase {
 
-//    private DatabaseReference databaseReference =
+    private static DatabaseReference referenciaFirebase;
 
+    public static DatabaseReference getFirebase() {
 
+        if (referenciaFirebase == null) {
+
+            referenciaFirebase = FirebaseDatabase.getInstance().getReference();
+        }
+
+        return referenciaFirebase;
+    }
 }

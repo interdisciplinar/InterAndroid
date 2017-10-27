@@ -36,7 +36,7 @@
             android:textColor="@color/Fonte" />
 
         <EditText
-            android:id="@+id/txtPWDCadastro"
+            android:id="@+id/txtSenhaCadastro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/espacoCampoLogin"
@@ -46,7 +46,7 @@
             android:textColor="@color/Fonte" />
 
         <EditText
-            android:id="@+id/txtConfPWD"
+            android:id="@+id/txtConfSenha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/espacoCampoLogin"
@@ -87,7 +87,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnProximo"
+            android:id="@+id/btnCadastrar"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

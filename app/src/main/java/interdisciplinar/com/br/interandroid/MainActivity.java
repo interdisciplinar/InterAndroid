@@ -11,6 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+
+import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
+
 public class MainActivity extends AppCompatActivity {
     private EditText Email;
     private EditText Senha;
@@ -20,10 +24,17 @@ public class MainActivity extends AppCompatActivity {
     private Button botaoCadastrar;
     private Toolbar toolbar;
 
+
+    private DatabaseReference referenciaFirebase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        referenciaFirebase.child("pontos").setValue("100");
+
 
         Email = (EditText) findViewById(R.id.txtEmailLogin);
         Senha = (EditText) findViewById(R.id.txtPWDLogin);

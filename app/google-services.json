@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "34761014988",
+    "firebase_url": "https://interandroid-38816.firebaseio.com",
+    "project_id": "interandroid-38816",
+    "storage_bucket": "interandroid-38816.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34761014988:android:0bd4a742689e7009",
+        "android_client_info": {
+          "package_name": "interdisciplinar.com.br.interandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34761014988-vaslgfsti3osheqll4i6rnnteg3mm6hn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "interdisciplinar.com.br.interandroid",
+            "certificate_hash": "d19498d2551086a419193e27401f5edf12387e42"
+          }
+        },
+        {
+          "client_id": "34761014988-q7ob6ean8mt0cv1ijken39e1vftmgk5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK_1ZSp93TjDZ2tM6DInOahHpUcYSXwxk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34761014988-q7ob6ean8mt0cv1ijken39e1vftmgk5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

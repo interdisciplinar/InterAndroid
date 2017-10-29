@@ -2,6 +2,7 @@ package interdisciplinar.com.br.interandroid;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,12 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
 import interdisciplinar.com.br.interandroid.model.Usuario;
 
 public class Cadastro extends AppCompatActivity {
@@ -25,6 +32,7 @@ public class Cadastro extends AppCompatActivity {
     private EditText confirmarSenha;
     private Button botaoCadastrar;
     private Usuario usuario;
+    private FirebaseAuth autenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +51,15 @@ public class Cadastro extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                usuario = new Usuario();
+                usuario.setEmail(email.getText().toString());
+                usuario.setSenha(senha.getText().toString());
+                cadastrarUsuario();
+
 
                 if (cliente.isChecked()) {
 
@@ -71,7 +84,25 @@ public class Cadastro extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main,menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    private void cadastrarUsuario() {
+
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        autenticacao.createUserWithEmailAndPassword(usuario.getEmail(), usuario.getSenha())
+                .addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Cadastro.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Cadastro.this, "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
     }
 }

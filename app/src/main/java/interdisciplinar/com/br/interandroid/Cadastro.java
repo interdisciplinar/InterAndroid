@@ -19,6 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthActionCodeException;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
@@ -109,7 +113,22 @@ public class Cadastro extends AppCompatActivity {
                     usuario.salvar();
 
                 } else {
-                    Toast.makeText(Cadastro.this, "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+
+                    String erroExcecao = "";
+
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        erroExcecao = "Digite uma senha mais forte";
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        erroExcecao = "E-mail digitado inválido.";
+                    } catch (FirebaseAuthUserCollisionException e) {
+                        erroExcecao = "Usuário já existente";
+                    } catch (Exception e) {
+                        erroExcecao = "Ao efetuar cadastro";
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(Cadastro.this, "Erro: " + erroExcecao, Toast.LENGTH_SHORT).show();
                 }
 
             }

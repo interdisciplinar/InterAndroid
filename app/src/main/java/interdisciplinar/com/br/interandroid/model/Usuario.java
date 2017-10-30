@@ -1,15 +1,26 @@
 package interdisciplinar.com.br.interandroid.model;
 
 
-public class Usuario {
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 
-    public Usuario() {
-    }
+import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
+
+public class Usuario {
 
     private String id;
     private String email;
     private String senha;
 
+    public Usuario() {
+    }
+
+    public void salvar() {
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        referenciaFirebase.child("usuarios").child(getId()).setValue(this);
+    }
+
+    @Exclude //Usado para não salvar este campo no banco de dados do usuario
     public String getId() {
         return id;
     }
@@ -26,6 +37,7 @@ public class Usuario {
         this.email = email;
     }
 
+    @Exclude //Usado para não salvar este campo no banco de dados do usuario
     public String getSenha() {
         return senha;
     }

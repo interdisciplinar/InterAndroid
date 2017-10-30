@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
 import interdisciplinar.com.br.interandroid.model.Usuario;
@@ -25,17 +27,18 @@ import interdisciplinar.com.br.interandroid.model.Usuario;
 public class Cadastro extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private RadioButton cliente;
-    private RadioButton empresa;
+
     private EditText email;
     private EditText senha;
     private EditText confirmarSenha;
+    private RadioButton cliente;
+    private RadioButton empresa;
     private Button botaoCadastrar;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
@@ -61,21 +64,21 @@ public class Cadastro extends AppCompatActivity {
                 cadastrarUsuario();
 
 
-                if (cliente.isChecked()) {
-
-                    startActivity(new Intent(Cadastro.this, CadastroCliente.class));
-
-                }
-                if (empresa.isChecked()) {
-
-                    startActivity(new Intent(Cadastro.this, CadastroEmp.class));
-
-                }
-                if (!cliente.isChecked() && !empresa.isChecked()) {
-
-                    Toast.makeText(getApplicationContext(), "Nenhum perfil foi selecionado", Toast.LENGTH_SHORT).show();
-
-                }
+//                if (cliente.isChecked()) {
+//
+//                    startActivity(new Intent(Cadastro.this, CadastroCliente.class));
+//
+//                }
+//                if (empresa.isChecked()) {
+//
+//                    startActivity(new Intent(Cadastro.this, CadastroEmp.class));
+//
+//                }
+//                if (!cliente.isChecked() && !empresa.isChecked()) {
+//
+//                    Toast.makeText(getApplicationContext(), "Nenhum perfil foi selecionado", Toast.LENGTH_SHORT).show();
+//
+//                }
 
             }
         });
@@ -91,18 +94,29 @@ public class Cadastro extends AppCompatActivity {
     private void cadastrarUsuario() {
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-        autenticacao.createUserWithEmailAndPassword(usuario.getEmail(), usuario.getSenha())
-                .addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+        autenticacao.createUserWithEmailAndPassword(
+                usuario.getEmail(),
+                usuario.getSenha()
+        ).addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(Cadastro.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
 
-                        if (task.isSuccessful()) {
-                            Toast.makeText(Cadastro.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(Cadastro.this, "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
-                        }
+                    FirebaseUser usuarioFirebase = task.getResult().getUser();
+                    usuario.setId(usuarioFirebase.getUid());
 
-                    }
-                });
+                    usuario.salvar();
+
+                } else {
+                    Toast.makeText(Cadastro.this, "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
+
+//    private boolean naoVaziaOuNula(String s){
+//        return s != null && !s.isEmpty();
+//    }
 }

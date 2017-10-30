@@ -25,21 +25,21 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
 
-    private DatabaseReference referenciaFirebase;
+//    private DatabaseReference referenciaFirebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        referenciaFirebase = ConfiguracaoFirebase.getFirebase();
-        referenciaFirebase.child("pontos").setValue("100");
+//        referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+//        referenciaFirebase.child("pontos").setValue("1000");
 
 
         Email = (EditText) findViewById(R.id.txtEmailLogin);
         Senha = (EditText) findViewById(R.id.txtPWDLogin);
         botaoLogin = (Button) findViewById(R.id.btnLogin);
-        botaoCadastrar = (Button) findViewById(R.id.btnCadastrar);
+        botaoCadastrar = (Button) findViewById(R.id.btnFazerCadastro);
         toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
 
         toolbar.setTitle("Título do Aplicativo");
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main,menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return true;
     }
 }

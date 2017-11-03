@@ -2,6 +2,8 @@ package interdisciplinar.com.br.interandroid;
 
 import android.content.Context;
 import android.icu.util.Calendar;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +18,7 @@ public class Agenda extends AppCompatActivity {
         private Context getContext(){
             return context;
         }
+        @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         protected void onCreate(Bundle savedInstanceState) {
 

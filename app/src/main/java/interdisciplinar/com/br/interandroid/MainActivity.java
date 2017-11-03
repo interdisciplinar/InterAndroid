@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.database.DatabaseReference;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        verificarUsuarioLogado();
+
         email = (EditText) findViewById(R.id.txtEmailLogin);
         senha = (EditText) findViewById(R.id.txtSenhaLogin);
         botaoLogin = (Button) findViewById(R.id.btnLogin);
@@ -57,18 +61,15 @@ public class MainActivity extends AppCompatActivity {
                 usuario = new Usuario();
                 usuario.setEmail(email.getText().toString());
                 usuario.setSenha(senha.getText().toString());
-                validarLogin();
 
 
-                Toast.makeText(getApplicationContext(), "Email: " + StringEmail, Toast.LENGTH_SHORT).show();
+                if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Campo Email ou Senha não foi preenchido", Toast.LENGTH_SHORT).show();
+                } else {
+                    validarLogin();
+                }
 
-                if (email.getText().toString().equalsIgnoreCase("Renato")) {
-                    if (senha.getText().toString().equals("senha")) {
-                        Toast.makeText(getApplicationContext(), "Autenticou", Toast.LENGTH_SHORT).show();
-                    } else
-                        Toast.makeText(getApplicationContext(), "Senha Incorreta", Toast.LENGTH_SHORT).show();
-                } else
-                    Toast.makeText(getApplicationContext(), "Email não encontrado", Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -83,6 +84,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void verificarUsuarioLogado() {
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        if (autenticacao.getCurrentUser() != null) {
+
+            abrirTelaPrincipal();
+        }
+    }
+
     private void validarLogin() {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.signInWithEmailAndPassword(
@@ -92,16 +101,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-
+                    abrirTelaPrincipal();
                     Toast.makeText(MainActivity.this, "Sucesso ao fazer Login", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    //Necessário fazer a tratativa das exceções de erro de Login
-                    Toast.makeText(MainActivity.this, "Erro ao fazer Login", Toast.LENGTH_SHORT).show();
+
+                    String erroExcecao = "";
+
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthInvalidUserException e) {
+                        erroExcecao = "Conta inexistente ou desativada";
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        erroExcecao = "Senha incorreta";
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    Toast.makeText(MainActivity.this, "Erro ao fazer Login: " + erroExcecao, Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
+    }
+
+    private void abrirTelaPrincipal() {
+        Intent intent = new Intent(MainActivity.this, Capa_Empresa.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

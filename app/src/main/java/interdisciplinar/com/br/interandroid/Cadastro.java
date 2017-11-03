@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,7 +32,6 @@ import interdisciplinar.com.br.interandroid.model.Usuario;
 public class Cadastro extends AppCompatActivity {
 
     private Toolbar toolbar;
-
     private EditText email;
     private EditText senha;
     private EditText confirmarSenha;
@@ -65,25 +65,23 @@ public class Cadastro extends AppCompatActivity {
                 usuario = new Usuario();
                 usuario.setEmail(email.getText().toString());
                 usuario.setSenha(senha.getText().toString());
-                cadastrarUsuario();
 
-
-//                if (cliente.isChecked()) {
-//
-//                    startActivity(new Intent(Cadastro.this, CadastroCliente.class));
-//
-//                }
-//                if (empresa.isChecked()) {
-//
-//                    startActivity(new Intent(Cadastro.this, CadastroEmp.class));
-//
-//                }
-//                if (!cliente.isChecked() && !empresa.isChecked()) {
-//
-//                    Toast.makeText(getApplicationContext(), "Nenhum perfil foi selecionado", Toast.LENGTH_SHORT).show();
-//
-//                }
-
+                //Verificar se todos os campos estão preenchidos
+                if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
+                    Toast.makeText(Cadastro.this, "Campo Email ou Senha não foi preenchido", Toast.LENGTH_SHORT).show();
+                } else if (!senha.getText().toString().equals(confirmarSenha.getText().toString())) {
+                    Toast.makeText(Cadastro.this, "Senhas digitadas não são iguais", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (cliente.isChecked()) {
+                        cadastrarUsuario();
+                        startActivity(new Intent(Cadastro.this, CadastroCliente.class));
+                    } else if (empresa.isChecked()) {
+                        cadastrarUsuario();
+                        startActivity(new Intent(Cadastro.this, CadastroEmp.class));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Nenhum perfil foi selecionado", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }
@@ -109,11 +107,9 @@ public class Cadastro extends AppCompatActivity {
 
                     FirebaseUser usuarioFirebase = task.getResult().getUser();
                     usuario.setId(usuarioFirebase.getUid());
-
                     usuario.salvar();
 
                 } else {
-
                     String erroExcecao = "";
 
                     try {
@@ -134,8 +130,4 @@ public class Cadastro extends AppCompatActivity {
             }
         });
     }
-
-//    private boolean naoVaziaOuNula(String s){
-//        return s != null && !s.isEmpty();
-//    }
 }

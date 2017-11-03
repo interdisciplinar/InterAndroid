@@ -6,6 +6,10 @@
     android:weightSum="1"
     android:background="@color/Fundo_Branco">
 
+    <include
+        android:id="@+id/toolbarTituloApp"
+        layout="@layout/toolbar" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

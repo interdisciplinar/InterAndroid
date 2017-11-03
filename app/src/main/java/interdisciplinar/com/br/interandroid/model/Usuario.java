@@ -1,6 +1,8 @@
 package interdisciplinar.com.br.interandroid.model;
 
 
+import android.widget.RadioButton;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
@@ -45,6 +47,7 @@ public class Usuario {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
 }
 
 

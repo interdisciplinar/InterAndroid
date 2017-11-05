@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@color/Fundo_Branco">
+
+    <ImageButton
+        android:id="@+id/Agendamento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/stat_notify_sdcard"
+        android:scaleType="fitEnd"
+        android:tint="@android:drawable/screen_background_dark_transparent"
+        app:srcCompat="@drawable/ic_agenda" />
+
+    <ImageButton
+        android:id="@+id/Mapa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_map"
+        android:background="@android:drawable/stat_notify_sdcard"
+        android:scaleType="fitEnd"
+        android:tint="@android:drawable/screen_background_dark_transparent"
+        />
+
+    <ImageButton
+        android:id="@+id/Buscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_lupa"
+        android:background="@android:drawable/stat_notify_sdcard"
+        android:scaleType="fitEnd"
+        android:tint="@android:drawable/screen_background_dark_transparent"
+        />
+    <ImageButton
+        android:id="@+id/Recentes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_action_database"
+        android:background="@android:drawable/stat_notify_sdcard"
+        android:scaleType="fitEnd"
+        android:tint="@android:drawable/screen_background_dark_transparent"
+
+        />
+    />
+</LinearLayout>

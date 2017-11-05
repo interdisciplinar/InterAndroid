@@ -5,95 +5,103 @@
     android:background="@color/Fundo_Branco"
     android:gravity="center"
     android:orientation="vertical">
-
     <include
         android:id="@+id/toolbarTituloApp"
         layout="@layout/toolbar" />
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_gravity="center">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/FacaCadastro"
-            android:textAlignment="center"
-            android:textColor="@color/Fonte"
-            android:textSize="@dimen/txtTituloValue" />
-
-        <EditText
-            android:id="@+id/txtEmailCadastro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:ems="12"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/Fonte" />
-
-        <EditText
-            android:id="@+id/txtSenhaCadastro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/espacoCampoLogin"
-            android:ems="12"
-            android:hint="@string/senha"
-            android:inputType="textPassword"
-            android:textColor="@color/Fonte" />
-
-        <EditText
-            android:id="@+id/txtConfSenha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/espacoCampoLogin"
-            android:ems="12"
-            android:hint="@string/Confirma"
-            android:inputType="textPassword"
-            android:textColor="@color/Fonte" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/espacoCampoLogin"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/FacaCadastro"
+                android:textAlignment="center"
+                android:textColor="@color/Fonte"
+                android:textSize="@dimen/txtTituloValue" />
 
-            <RadioGroup
-                android:id="@+id/radioGrupoTipo"
+            <EditText
+                android:id="@+id/txtEmailCadastro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:ems="12"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/Fonte" />
+
+            <EditText
+                android:id="@+id/txtSenhaCadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacoCampoLogin"
+                android:ems="12"
+                android:hint="@string/senha"
+                android:inputType="textPassword"
+                android:textColor="@color/Fonte" />
+
+            <EditText
+                android:id="@+id/txtConfSenha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacoCampoLogin"
+                android:ems="12"
+                android:hint="@string/Confirma"
+                android:inputType="textPassword"
+                android:textColor="@color/Fonte" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacoCampoLogin"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rbCliente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Cliente" />
 
-                <RadioButton
-                    android:id="@+id/rbEmpresa"
+                <RadioGroup
+                    android:id="@+id/radioGrupoTipo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:text="@string/Empresa" />
-            </RadioGroup>
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbCliente"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Cliente" />
+
+                    <RadioButton
+                        android:id="@+id/rbEmpresa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:text="@string/Empresa" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnCadastrar"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacoCampoLogin"
+                android:text="@string/Cadastrar" />
 
         </LinearLayout>
+    </ScrollView>
 
-        <Button
-            android:id="@+id/btnCadastrar"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/espacoCampoLogin"
-            android:text="@string/Cadastrar" />
 
-    </LinearLayout>
+
 
 </LinearLayout>

@@ -33,6 +33,15 @@
     <string name="FacaLogin">Faça o seu Login</string>
     <string name="FacaCadastro">Faça o seu Cadastro</string>
     <string name="Sair">Sair</string>
+    <string name="CPF">CPF</string>
+    <string name="CNPJ">CNPJ ou CPF</string>
+    <string name="Salvar">Salvar</string>
 
 
+    <string-array name="Servicos">
+        <item>Pé e mão</item>
+        <item>Massagem</item>
+        <item>Bla</item>
+        <item>Bla</item>
+    </string-array>
 </resources>

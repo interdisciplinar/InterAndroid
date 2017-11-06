@@ -20,14 +20,14 @@ public class HomeCliente extends AppCompatActivity {
 
         btnMapa = (ImageButton) findViewById(R.id.Mapa);
 
-//        btnMapa.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                startActivity(new Intent(HomeCliente.this, MapsActivity.class));
-//                finish();
-//            }
-//        });
+        btnMapa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(HomeCliente.this, MapsActivity.class));
+                finish();
+            }
+        });
 
     }
 }

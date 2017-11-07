@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,77 +11,84 @@
         android:id="@+id/toolbarTituloApp"
         layout="@layout/toolbar" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/FacaLogin"
-            android:textAlignment="center"
-            android:textColor="@color/Fonte"
-            android:textSize="@dimen/txtTituloValue" />
-
-
-        <EditText
-            android:id="@+id/txtEmailLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:ems="12"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/Fonte" />
-
-        <EditText
-            android:id="@+id/txtSenhaLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/espacoCampoLogin"
-            android:ems="12"
-            android:hint="@string/senha"
-            android:inputType="textPassword"
-            android:textColor="@color/Fonte" />
-
+        android:layout_gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="@dimen/espacoCampoLogin"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/FacaLogin"
+                android:textAlignment="center"
+                android:textColor="@color/Fonte"
+                android:textSize="@dimen/txtTituloValue" />
+
+
+            <EditText
+                android:id="@+id/txtEmailLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:ems="12"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/Fonte" />
+
+            <EditText
+                android:id="@+id/txtSenhaLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espacoCampoLogin"
+                android:ems="12"
+                android:hint="@string/senha"
+                android:inputType="textPassword"
+                android:textColor="@color/Fonte" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="@dimen/espacoCampoLogin"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnLogin"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Login" />
+
+                <Button
+                    android:id="@+id/btnFazerCadastro"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="@string/Cadastrar" />
+
+            </LinearLayout>
 
             <Button
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnLoginFace"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Login" />
-
-            <Button
-                android:id="@+id/btnFazerCadastro"
-                style="@style/Widget.AppCompat.Button.Colored"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="@string/Cadastrar" />
+                android:layout_marginTop="@dimen/espacoCampoLogin"
+                android:text="@string/LoginFace" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnLoginFace"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/espacoCampoLogin"
-            android:text="@string/LoginFace" />
-
-    </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -98,4 +104,5 @@
 
     </LinearLayout>
 
-</android.support.v7.widget.LinearLayoutCompat>
+
+</LinearLayout>

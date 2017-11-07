@@ -1,8 +1,10 @@
 package interdisciplinar.com.br.interandroid;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -40,6 +42,8 @@ public class Cadastro extends AppCompatActivity {
     private Button botaoCadastrar;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
+    private AlertDialog.Builder dialog;
+    private String msgErro;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -58,7 +62,6 @@ public class Cadastro extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,34 +72,46 @@ public class Cadastro extends AppCompatActivity {
 
                 //Verificar se todos os campos estão preenchidos
                 if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
-                    Toast.makeText(Cadastro.this, "Campo Email ou Senha não foi preenchido", Toast.LENGTH_SHORT).show();
+
+                    msgErro = "Campo E-mail ou Senha não foi preenchido";
+                    msgCadastro(msgErro);
+
+                    //Verifica se as senhas digitadas são iguais
                 } else if (!senha.getText().toString().equals(confirmarSenha.getText().toString())) {
-                    Toast.makeText(Cadastro.this, "Senhas digitadas não são iguais", Toast.LENGTH_SHORT).show();
+
+                    msgErro = "Senhas digitadas não são iguais";
+                    msgCadastro(msgErro);
+
                 } else {
                     if (cliente.isChecked()) {
-                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
-                        String Email = email.getText().toString();
-                        String Senha = senha.getText().toString();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("Email",Email);
-                        bundle.putString("Senha",Senha);
-                        intent.putExtras(bundle);
-                        cadastrarUsuario();
-                        startActivity(intent);
+                        cadastrarUsuario(cliente);
+
+//                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
+//                        String Email = email.getText().toString();
+//                        String Senha = senha.getText().toString();
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("Email", Email);
+//                        bundle.putString("Senha", Senha);
+//                        intent.putExtras(bundle);
+//                        startActivity(intent);
 
                     } else if (empresa.isChecked()) {
-                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
-                        String Email = email.getText().toString();
-                        String Senha = senha.getText().toString();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("Email",Email);
-                        bundle.putString("Senha",Senha);
-                        intent.putExtras(bundle);
-                        cadastrarUsuario();
-                        startActivity(intent);
+                        cadastrarUsuario(empresa);
+
+//                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
+//                        String Email = email.getText().toString();
+//                        String Senha = senha.getText().toString();
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("Email", Email);
+//                        bundle.putString("Senha", Senha);
+//                        intent.putExtras(bundle);
+//                        startActivity(intent);
 
                     } else {
-                        Toast.makeText(getApplicationContext(), "Nenhum perfil foi selecionado", Toast.LENGTH_SHORT).show();
+
+                        msgErro = "Nenhum perfil foi selecionado";
+                        msgCadastro(msgErro);
+
                     }
                 }
             }
@@ -110,7 +125,7 @@ public class Cadastro extends AppCompatActivity {
         return true;
     }
 
-    private void cadastrarUsuario() {
+    private void cadastrarUsuario(final RadioButton perfil) {
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
@@ -120,6 +135,14 @@ public class Cadastro extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    if (perfil.equals(cliente)) {
+                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
+                        startActivity(intent);
+                    }
+
                     Toast.makeText(Cadastro.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
 
                     FirebaseUser usuarioFirebase = task.getResult().getUser();
@@ -141,11 +164,35 @@ public class Cadastro extends AppCompatActivity {
                         erroExcecao = "Ao efetuar cadastro";
                         e.printStackTrace();
                     }
-                    Toast.makeText(Cadastro.this, "Erro: " + erroExcecao, Toast.LENGTH_SHORT).show();
+                    msgCadastro(erroExcecao);
+//                    Toast.makeText(Cadastro.this, "Erro: " + erroExcecao, Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
+    }
+
+    private void msgCadastro(String msg) {
+        //Criar alert dialog
+        dialog = new AlertDialog.Builder(Cadastro.this);
+        //Configurar o titulo
+        dialog.setTitle("Erro ao efetuar cadastro");
+        //Configura a mensagem
+        dialog.setMessage(msg);
+        //Nao deixa desaparecer a dialog se clicar fora dela
+        dialog.setCancelable(false);
+        //Definir icone da dialog
+        dialog.setIcon(android.R.drawable.ic_delete);
+        //Ação do botão OK da mensagem
+        dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+//                Toast.makeText(MainActivity.this, "Campo Email ou Senha não foi preenchido", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        dialog.create();
+        dialog.show();
     }
 
 }

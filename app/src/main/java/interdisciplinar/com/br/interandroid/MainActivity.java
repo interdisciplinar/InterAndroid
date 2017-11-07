@@ -1,7 +1,9 @@
 package interdisciplinar.com.br.interandroid;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -26,13 +28,12 @@ import interdisciplinar.com.br.interandroid.model.Usuario;
 public class MainActivity extends AppCompatActivity {
     private EditText email;
     private EditText senha;
-    private String StringEmail = "";
-    private String StringSenha = "";
     private Button botaoLogin;
     private Button botaoCadastrar;
     private Toolbar toolbar;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
+    private AlertDialog.Builder dialog;
 
 
     @Override
@@ -51,8 +52,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Título do Aplicativo");
         setSupportActionBar(toolbar);
 
-//        StringEmail = (String) Email.getText().toString();
-//        StringSenha = Senha.getText().toString();
 
         botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,14 +61,16 @@ public class MainActivity extends AppCompatActivity {
                 usuario.setEmail(email.getText().toString());
                 usuario.setSenha(senha.getText().toString());
 
-
                 if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Campo Email ou Senha não foi preenchido", Toast.LENGTH_SHORT).show();
+
+                    String msgErro = "Campo E-mail ou Senha não foi preenchido";
+                    msgLogin(msgErro);
+
                 } else {
+
                     validarLogin();
+
                 }
-
-
             }
         });
 
@@ -107,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
 
                     String erroExcecao = "";
-
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthInvalidUserException e) {
@@ -117,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
-                    Toast.makeText(MainActivity.this, "Erro ao fazer Login: " + erroExcecao, Toast.LENGTH_SHORT).show();
+                    msgLogin(erroExcecao);
+//                    Toast.makeText(MainActivity.this, "Erro ao fazer Login: " + erroExcecao, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -136,5 +136,28 @@ public class MainActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    private void msgLogin(String msg) {
+        //Criar alert dialog
+        dialog = new AlertDialog.Builder(MainActivity.this);
+        //Configurar o titulo
+        dialog.setTitle("Erro ao fazer Login");
+        //Configura a mensagem
+        dialog.setMessage(msg);
+        //Nao deixa desaparecer a dialog se clicar fora dela
+        dialog.setCancelable(false);
+        //Definir icone da dialog
+        dialog.setIcon(android.R.drawable.ic_delete);
+        //Ação do botão OK da mensagem
+        dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+//                Toast.makeText(MainActivity.this, "Campo Email ou Senha não foi preenchido", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        dialog.create();
+        dialog.show();
     }
 }

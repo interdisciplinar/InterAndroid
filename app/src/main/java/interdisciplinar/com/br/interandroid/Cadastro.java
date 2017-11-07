@@ -58,6 +58,7 @@ public class Cadastro extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,11 +74,27 @@ public class Cadastro extends AppCompatActivity {
                     Toast.makeText(Cadastro.this, "Senhas digitadas não são iguais", Toast.LENGTH_SHORT).show();
                 } else {
                     if (cliente.isChecked()) {
+                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
+                        String Email = email.getText().toString();
+                        String Senha = senha.getText().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Email",Email);
+                        bundle.putString("Senha",Senha);
+                        intent.putExtras(bundle);
                         cadastrarUsuario();
-                        startActivity(new Intent(Cadastro.this, CadastroCliente.class));
+                        startActivity(intent);
+
                     } else if (empresa.isChecked()) {
+                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
+                        String Email = email.getText().toString();
+                        String Senha = senha.getText().toString();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Email",Email);
+                        bundle.putString("Senha",Senha);
+                        intent.putExtras(bundle);
                         cadastrarUsuario();
-                        startActivity(new Intent(Cadastro.this, CadastroEmp.class));
+                        startActivity(intent);
+
                     } else {
                         Toast.makeText(getApplicationContext(), "Nenhum perfil foi selecionado", Toast.LENGTH_SHORT).show();
                     }
@@ -130,4 +147,5 @@ public class Cadastro extends AppCompatActivity {
             }
         });
     }
+
 }

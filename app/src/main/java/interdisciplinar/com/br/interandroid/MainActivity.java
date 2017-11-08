@@ -1,9 +1,7 @@
 package interdisciplinar.com.br.interandroid;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -33,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
-    private AlertDialog.Builder dialog;
+    private String tituloErro;
+    private String msgErro;
 
 
     @Override
@@ -63,8 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
                 if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
 
-                    String msgErro = "Campo E-mail ou Senha não foi preenchido";
-                    msgLogin(msgErro);
+                    tituloErro = "Erro ao fazer Login";
+                    msgErro = "Campo E-mail ou Senha não foi preenchido";
+                    MsgDialog.msgErro(MainActivity.this, tituloErro, msgErro);
 
                 } else {
 
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                 startActivity(new Intent(MainActivity.this, Cadastro.class));
                 finish();
+
             }
         });
     }
@@ -88,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
     private void verificarUsuarioLogado() {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         if (autenticacao.getCurrentUser() != null) {
-
             abrirTelaPrincipal();
         }
     }
@@ -103,26 +103,25 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     abrirTelaPrincipal();
-                    Toast.makeText(MainActivity.this, "Sucesso ao fazer Login", Toast.LENGTH_SHORT).show();
-
+//                    Toast.makeText(MainActivity.this, "Sucesso ao fazer Login", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    String erroExcecao = "";
+                    tituloErro = "Erro ao fazer Login";
+
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthInvalidUserException e) {
-                        erroExcecao = "Conta inexistente ou desativada";
+                        msgErro = "Conta inexistente ou desativada";
                     } catch (FirebaseAuthInvalidCredentialsException e) {
-                        erroExcecao = "Senha incorreta";
+                        msgErro = "Senha incorreta";
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    msgLogin(erroExcecao);
-//                    Toast.makeText(MainActivity.this, "Erro ao fazer Login: " + erroExcecao, Toast.LENGTH_SHORT).show();
+
+                    MsgDialog.msgErro(MainActivity.this, tituloErro, msgErro);
                 }
             }
         });
-
     }
 
     private void abrirTelaPrincipal() {
@@ -138,26 +137,4 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void msgLogin(String msg) {
-        //Criar alert dialog
-        dialog = new AlertDialog.Builder(MainActivity.this);
-        //Configurar o titulo
-        dialog.setTitle("Erro ao fazer Login");
-        //Configura a mensagem
-        dialog.setMessage(msg);
-        //Nao deixa desaparecer a dialog se clicar fora dela
-        dialog.setCancelable(false);
-        //Definir icone da dialog
-        dialog.setIcon(android.R.drawable.ic_delete);
-        //Ação do botão OK da mensagem
-        dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-//                Toast.makeText(MainActivity.this, "Campo Email ou Senha não foi preenchido", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        dialog.create();
-        dialog.show();
-    }
 }

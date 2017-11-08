@@ -1,28 +1,23 @@
 package interdisciplinar.com.br.interandroid;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthActionCodeException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
@@ -42,7 +37,7 @@ public class Cadastro extends AppCompatActivity {
     private Button botaoCadastrar;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
-    private AlertDialog.Builder dialog;
+    private String tituloErro = "Erro ao efetuar cadastro";
     private String msgErro;
 
     @Override
@@ -74,13 +69,13 @@ public class Cadastro extends AppCompatActivity {
                 if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
 
                     msgErro = "Campo E-mail ou Senha não foi preenchido";
-                    msgCadastro(msgErro);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                     //Verifica se as senhas digitadas são iguais
                 } else if (!senha.getText().toString().equals(confirmarSenha.getText().toString())) {
 
                     msgErro = "Senhas digitadas não são iguais";
-                    msgCadastro(msgErro);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                 } else {
                     if (cliente.isChecked()) {
@@ -110,7 +105,7 @@ public class Cadastro extends AppCompatActivity {
                     } else {
 
                         msgErro = "Nenhum perfil foi selecionado";
-                        msgCadastro(msgErro);
+                        MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                     }
                 }
@@ -150,49 +145,24 @@ public class Cadastro extends AppCompatActivity {
                     usuario.salvar();
 
                 } else {
-                    String erroExcecao = "";
 
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthWeakPasswordException e) {
-                        erroExcecao = "Digite uma senha mais forte";
+                        msgErro = "Digite uma senha mais forte";
                     } catch (FirebaseAuthInvalidCredentialsException e) {
-                        erroExcecao = "E-mail digitado inválido.";
+                        msgErro = "E-mail digitado inválido.";
                     } catch (FirebaseAuthUserCollisionException e) {
-                        erroExcecao = "Usuário já existente";
+                        msgErro = "Usuário já existente";
                     } catch (Exception e) {
-                        erroExcecao = "Ao efetuar cadastro";
+                        msgErro = "Ao efetuar cadastro";
                         e.printStackTrace();
                     }
-                    msgCadastro(erroExcecao);
-//                    Toast.makeText(Cadastro.this, "Erro: " + erroExcecao, Toast.LENGTH_SHORT).show();
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+
                 }
-
             }
         });
-    }
-
-    private void msgCadastro(String msg) {
-        //Criar alert dialog
-        dialog = new AlertDialog.Builder(Cadastro.this);
-        //Configurar o titulo
-        dialog.setTitle("Erro ao efetuar cadastro");
-        //Configura a mensagem
-        dialog.setMessage(msg);
-        //Nao deixa desaparecer a dialog se clicar fora dela
-        dialog.setCancelable(false);
-        //Definir icone da dialog
-        dialog.setIcon(android.R.drawable.ic_delete);
-        //Ação do botão OK da mensagem
-        dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-//                Toast.makeText(MainActivity.this, "Campo Email ou Senha não foi preenchido", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        dialog.create();
-        dialog.show();
     }
 
 }

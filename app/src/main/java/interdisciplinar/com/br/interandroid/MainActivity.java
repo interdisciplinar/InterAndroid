@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,10 +17,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
-import com.google.firebase.database.DatabaseReference;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
+import interdisciplinar.com.br.interandroid.helper.MsgDialog;
 import interdisciplinar.com.br.interandroid.model.Usuario;
+
+import com.facebook.stetho.Stetho; //Para visualizar o banco SQLite no Google Chrome
 
 public class MainActivity extends AppCompatActivity {
     private EditText email;
@@ -40,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//Para visualizar o banco SQLite no Google Chrome
+        Stetho.initialize(
+                Stetho.newInitializerBuilder(this)
+                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+                        .build());
+//***********************************************************************
+
         verificarUsuarioLogado();
 
         email = (EditText) findViewById(R.id.txtEmailLogin);
@@ -48,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         botaoCadastrar = (Button) findViewById(R.id.btnFazerCadastro);
         toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
 
-        toolbar.setTitle("Título do Aplicativo");
+        toolbar.setTitle(getString(R.string.app_name));
         setSupportActionBar(toolbar);
 
 
@@ -62,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
                 if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
 
-                    tituloErro = "Erro ao fazer Login";
-                    msgErro = "Campo E-mail ou Senha não foi preenchido";
+                    tituloErro = getString(R.string.tituloErroLogin);
+                    msgErro = getString(R.string.emailOuSenhaNaoPreenchido);
                     MsgDialog.msgErro(MainActivity.this, tituloErro, msgErro);
 
                 } else {
@@ -106,14 +115,14 @@ public class MainActivity extends AppCompatActivity {
 //                    Toast.makeText(MainActivity.this, "Sucesso ao fazer Login", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    tituloErro = "Erro ao fazer Login";
+                    tituloErro = getString(R.string.tituloErroLogin);
 
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthInvalidUserException e) {
-                        msgErro = "Conta inexistente ou desativada";
+                        msgErro = getString(R.string.contaInexixtente);
                     } catch (FirebaseAuthInvalidCredentialsException e) {
-                        msgErro = "Senha incorreta";
+                        msgErro = getString(R.string.senhaIncorreta);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

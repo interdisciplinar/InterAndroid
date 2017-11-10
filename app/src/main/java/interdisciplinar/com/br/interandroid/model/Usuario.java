@@ -13,6 +13,8 @@ public class Usuario {
     private String id;
     private String email;
     private String senha;
+    private String nome;
+    private String sobrenome;
 
     public Usuario() {
     }
@@ -48,6 +50,21 @@ public class Usuario {
         this.senha = senha;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
 }
 
 

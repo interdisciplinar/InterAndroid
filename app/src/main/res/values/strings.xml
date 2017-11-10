@@ -36,6 +36,20 @@
     <string name="CPF">CPF</string>
     <string name="CNPJ">CNPJ ou CPF</string>
     <string name="Salvar">Salvar</string>
+    <string name="termosDeUso">Eu aceito os termos de uso</string>
+
+    <string name="emailOuSenhaNaoPreenchido">Campo E-mail ou Senha não foi preenchido</string>
+    <string name="senhasDiferentes">Senhas digitadas não são iguais</string>
+    <string name="tituloErroCadastro">Erro ao efetuar cadastro</string>
+    <string name="semPerfil">Nenhum perfil foi selecionado</string>
+    <string name="senhaFraca">Digite uma senha mais forte</string>
+    <string name="emailInvalido">E-mail digitado inválido</string>
+    <string name="usuarioExixtente">Usuário já existente</string>
+    <string name="erroEfetuarCadastro">Ao efetuar cadastro</string>
+    <string name="sucessoCadastro">Sucesso ao cadastrar usuário</string>
+    <string name="tituloErroLogin">Erro ao fazer Login</string>
+    <string name="contaInexixtente">Conta inexistente ou desativada</string>
+    <string name="senhaIncorreta">Senha incorreta</string>
 
 
     <string-array name="Servicos">

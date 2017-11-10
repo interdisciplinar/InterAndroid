@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
+import interdisciplinar.com.br.interandroid.helper.MsgDialog;
 import interdisciplinar.com.br.interandroid.model.Usuario;
 
 public class Cadastro extends AppCompatActivity {
@@ -37,7 +38,7 @@ public class Cadastro extends AppCompatActivity {
     private Button botaoCadastrar;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
-    private String tituloErro = "Erro ao efetuar cadastro";
+    private String tituloErro = getString(R.string.tituloErroCadastro);
     private String msgErro;
 
     @Override
@@ -53,7 +54,7 @@ public class Cadastro extends AppCompatActivity {
         empresa = (RadioButton) findViewById(R.id.rbEmpresa);
         botaoCadastrar = (Button) findViewById(R.id.btnCadastrar);
 
-        toolbar.setTitle("Título do Aplicativo");
+        toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
 
 
@@ -68,13 +69,13 @@ public class Cadastro extends AppCompatActivity {
                 //Verificar se todos os campos estão preenchidos
                 if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
 
-                    msgErro = "Campo E-mail ou Senha não foi preenchido";
+                    msgErro = getString(R.string.emailOuSenhaNaoPreenchido);
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                     //Verifica se as senhas digitadas são iguais
                 } else if (!senha.getText().toString().equals(confirmarSenha.getText().toString())) {
 
-                    msgErro = "Senhas digitadas não são iguais";
+                    msgErro = getString(R.string.senhasDiferentes);
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                 } else {
@@ -82,12 +83,18 @@ public class Cadastro extends AppCompatActivity {
                         cadastrarUsuario(cliente);
 
 //                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
+//                        intent.putExtra("email",email.getText().toString());
+//                        intent.putExtra("senha",senha.getText().toString());
+
+
 //                        String Email = email.getText().toString();
 //                        String Senha = senha.getText().toString();
 //                        Bundle bundle = new Bundle();
 //                        bundle.putString("Email", Email);
 //                        bundle.putString("Senha", Senha);
 //                        intent.putExtras(bundle);
+
+
 //                        startActivity(intent);
 
                     } else if (empresa.isChecked()) {
@@ -104,7 +111,7 @@ public class Cadastro extends AppCompatActivity {
 
                     } else {
 
-                        msgErro = "Nenhum perfil foi selecionado";
+                        msgErro = getString(R.string.semPerfil);
                         MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                     }
@@ -138,7 +145,7 @@ public class Cadastro extends AppCompatActivity {
                         startActivity(intent);
                     }
 
-                    Toast.makeText(Cadastro.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Cadastro.this, getString(R.string.sucessoCadastro), Toast.LENGTH_SHORT).show();
 
                     FirebaseUser usuarioFirebase = task.getResult().getUser();
                     usuario.setId(usuarioFirebase.getUid());
@@ -149,13 +156,13 @@ public class Cadastro extends AppCompatActivity {
                     try {
                         throw task.getException();
                     } catch (FirebaseAuthWeakPasswordException e) {
-                        msgErro = "Digite uma senha mais forte";
+                        msgErro = getString(R.string.senhaFraca);
                     } catch (FirebaseAuthInvalidCredentialsException e) {
-                        msgErro = "E-mail digitado inválido.";
+                        msgErro = getString(R.string.emailInvalido);
                     } catch (FirebaseAuthUserCollisionException e) {
-                        msgErro = "Usuário já existente";
+                        msgErro = getString(R.string.usuarioExixtente);
                     } catch (Exception e) {
-                        msgErro = "Ao efetuar cadastro";
+                        msgErro = getString(R.string.erroEfetuarCadastro);
                         e.printStackTrace();
                     }
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);

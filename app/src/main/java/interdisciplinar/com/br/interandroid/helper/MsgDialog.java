@@ -1,4 +1,4 @@
-package interdisciplinar.com.br.interandroid;
+package interdisciplinar.com.br.interandroid.helper;
 
 import android.content.Context;
 import android.support.v7.app.AlertDialog;

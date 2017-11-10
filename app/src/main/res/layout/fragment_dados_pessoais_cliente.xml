@@ -30,7 +30,7 @@
                 android:inputType="textAutoComplete" />
 
             <EditText
-                android:id="@+id/txtCPF"
+                android:id="@+id/txtCPFCliente"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/CPF"
@@ -263,10 +263,8 @@
                 android:id="@+id/Termos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Eu aceito os termos de uso"
-                android:layout_gravity="left"
-                />
-
+                android:text="@string/termosDeUso"
+                android:layout_gravity="left" />
 
         </LinearLayout>
     </ScrollView>

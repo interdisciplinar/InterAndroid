@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
+import interdisciplinar.com.br.interandroid.fragment.DadosPessoaisClienteFragment;
 import interdisciplinar.com.br.interandroid.helper.MsgDialog;
 import interdisciplinar.com.br.interandroid.model.Usuario;
 
@@ -38,7 +39,7 @@ public class Cadastro extends AppCompatActivity {
     private Button botaoCadastrar;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
-    private String tituloErro = getString(R.string.tituloErroCadastro);
+    public String tituloErro;
     private String msgErro;
 
     @Override
@@ -56,15 +57,16 @@ public class Cadastro extends AppCompatActivity {
 
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
+        tituloErro = getString(R.string.tituloErroCadastro);
 
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                usuario = new Usuario();
-                usuario.setEmail(email.getText().toString());
-                usuario.setSenha(senha.getText().toString());
+//                usuario = new Usuario();
+//                usuario.setEmail(email.getText().toString());
+//                usuario.setSenha(senha.getText().toString());
 
                 //Verificar se todos os campos estão preenchidos
                 if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
@@ -80,11 +82,11 @@ public class Cadastro extends AppCompatActivity {
 
                 } else {
                     if (cliente.isChecked()) {
-                        cadastrarUsuario(cliente);
+//                        cadastrarUsuario(cliente);
 
-//                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
-//                        intent.putExtra("email",email.getText().toString());
-//                        intent.putExtra("senha",senha.getText().toString());
+                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
+                        intent.putExtra("email",email.getText().toString());
+                        intent.putExtra("senha",senha.getText().toString());
 
 
 //                        String Email = email.getText().toString();
@@ -95,10 +97,10 @@ public class Cadastro extends AppCompatActivity {
 //                        intent.putExtras(bundle);
 
 
-//                        startActivity(intent);
+                        startActivity(intent);
 
                     } else if (empresa.isChecked()) {
-                        cadastrarUsuario(empresa);
+//                        cadastrarUsuario(empresa);
 
 //                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
 //                        String Email = email.getText().toString();

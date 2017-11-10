@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">InterAndroid</string>
+    <string name="telaCadastro">"Cadastro de Clientes"</string>
     <string name="email">Email</string>
     <string name="senha">Senha</string>
     <string name="Login">Login</string>

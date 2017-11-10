@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
+import interdisciplinar.com.br.interandroid.CadastroCliente;
 import interdisciplinar.com.br.interandroid.R;
 
 /**
@@ -28,8 +29,12 @@ public class DadosEnderecoClienteFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         view = inflater.inflate(R.layout.fragment_dados_endereco_cliente, container, false);
+
+//        String s = CadastroCliente.senha;
+//        String e = CadastroCliente.email;
+
 
         cep = (EditText) view.findViewById(R.id.txtCEPCliente);
 

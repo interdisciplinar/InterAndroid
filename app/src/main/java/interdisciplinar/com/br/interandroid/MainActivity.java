@@ -22,7 +22,7 @@ import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
 import interdisciplinar.com.br.interandroid.helper.MsgDialog;
 import interdisciplinar.com.br.interandroid.model.Usuario;
 
-import com.facebook.stetho.Stetho; //Para visualizar o banco SQLite no Google Chrome
+//import com.facebook.stetho.Stetho; //Para visualizar o banco SQLite no Google Chrome
 
 public class MainActivity extends AppCompatActivity {
     private EditText email;
@@ -41,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//Para visualizar o banco SQLite no Google Chrome
-        Stetho.initialize(
-                Stetho.newInitializerBuilder(this)
-                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
-                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
-                        .build());
-//***********************************************************************
+        //Para visualizar o banco SQLite no Google Chrome
+//        Stetho.initialize(
+//                Stetho.newInitializerBuilder(this)
+//                        .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+//                        .enableWebKitInspector(Stetho.defaultInspectorModulesProvider(this))
+//                        .build());
+        //***********************************************************************
 
         verificarUsuarioLogado();
 

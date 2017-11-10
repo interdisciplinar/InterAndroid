@@ -34,7 +34,7 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:11.0.4'
 
     //Para usar o banco de dados via Google Chrome
-    compile 'com.facebook.stetho:stetho:1.5.0'
+//    compile 'com.facebook.stetho:stetho:1.5.0'
     testCompile 'junit:junit:4.12'
 }
 

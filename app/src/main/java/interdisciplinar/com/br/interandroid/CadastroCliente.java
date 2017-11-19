@@ -22,6 +22,7 @@ public class CadastroCliente extends AppCompatActivity {
     private ViewPager viewPager;
     public static String email;
     public static String senha;
+    public static String perfil;
 
 
     @Override
@@ -34,10 +35,13 @@ public class CadastroCliente extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.vpPaginaCliente);
 
         Intent intent = getIntent();
-        email = intent.getStringExtra("email");
-        senha = intent.getStringExtra("senha");
-        Log.i("teste",email);
-        Log.i("teste",senha);
+        Bundle bundle = intent.getExtras();
+
+//        Log.i("teste", String.valueOf(bundle));
+//        String teste = "teste;";
+//        bundle.putString("teste", teste);
+//        Log.i("teste", String.valueOf(bundle));
+
 
 
         //Configurar adapter

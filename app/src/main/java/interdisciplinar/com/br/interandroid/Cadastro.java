@@ -1,6 +1,7 @@
 package interdisciplinar.com.br.interandroid;
 
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -64,9 +65,9 @@ public class Cadastro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-//                usuario = new Usuario();
-//                usuario.setEmail(email.getText().toString());
-//                usuario.setSenha(senha.getText().toString());
+                usuario = new Usuario();
+                usuario.setEmail(email.getText().toString());
+                usuario.setSenha(senha.getText().toString());
 
                 //Verificar se todos os campos estão preenchidos
                 if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
@@ -82,34 +83,12 @@ public class Cadastro extends AppCompatActivity {
 
                 } else {
                     if (cliente.isChecked()) {
-//                        cadastrarUsuario(cliente);
 
-                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
-                        intent.putExtra("email",email.getText().toString());
-                        intent.putExtra("senha",senha.getText().toString());
-
-
-//                        String Email = email.getText().toString();
-//                        String Senha = senha.getText().toString();
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("Email", Email);
-//                        bundle.putString("Senha", Senha);
-//                        intent.putExtras(bundle);
-
-
-                        startActivity(intent);
+                        cadastrarUsuario(cliente);
 
                     } else if (empresa.isChecked()) {
-//                        cadastrarUsuario(empresa);
 
-//                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
-//                        String Email = email.getText().toString();
-//                        String Senha = senha.getText().toString();
-//                        Bundle bundle = new Bundle();
-//                        bundle.putString("Email", Email);
-//                        bundle.putString("Senha", Senha);
-//                        intent.putExtras(bundle);
-//                        startActivity(intent);
+                        cadastrarUsuario(empresa);
 
                     } else {
 
@@ -139,11 +118,19 @@ public class Cadastro extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("email", email.getText().toString());
+                    bundle.putString("senha", senha.getText().toString());
+                    bundle.putString("perfil", perfil.getText().toString());
+
                     if (perfil.equals(cliente)) {
                         Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     } else {
                         Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
+                        intent.putExtras(bundle);
                         startActivity(intent);
                     }
 

@@ -128,10 +128,12 @@ public class Cadastro extends AppCompatActivity {
                         Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
                     } else {
                         Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
                         intent.putExtras(bundle);
                         startActivity(intent);
+                        finish();
                     }
 
                     Toast.makeText(Cadastro.this, getString(R.string.sucessoCadastro), Toast.LENGTH_SHORT).show();

@@ -62,6 +62,10 @@ public class DadosPessoaisClienteFragment extends Fragment {
         MaskTextWatcher maskCelular = new MaskTextWatcher(celular, simpleMaskCelular);
         celular.addTextChangedListener(maskCelular);
 
+        SimpleMaskFormatter simpleMaskCPF = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
+        MaskTextWatcher maskCPF = new MaskTextWatcher(cpf, simpleMaskCPF);
+        cpf.addTextChangedListener(maskCPF);
+
 
         return view;
     }

@@ -51,7 +51,7 @@ public class Usuario {
         this.email = email;
     }
 
-    @Exclude //Usado para não salvar este campo no banco de dados do usuario
+//    @Exclude //Usado para não salvar este campo no banco de dados do usuario
     public String getSenha() {
         return senha;
     }

@@ -43,7 +43,7 @@ public class Cadastro extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     public String tituloErro;
     private String msgErro;
-    private LinearLayout Pagina1;
+    private LinearLayout emailSenha;
     private LinearLayout Pagina2;
 
     @Override
@@ -63,10 +63,10 @@ public class Cadastro extends AppCompatActivity {
         setSupportActionBar(toolbar);
         tituloErro = getString(R.string.tituloErroCadastro);
 
-        Pagina1 = (LinearLayout) findViewById(R.id.Pagina1);
+        emailSenha = (LinearLayout) findViewById(R.id.Pagina1);
         Pagina2 = (LinearLayout) findViewById(R.id.Pagina2);
 
-        Pagina1.setVisibility(View.VISIBLE);
+        emailSenha.setVisibility(View.VISIBLE);
         Pagina2.setVisibility(View.INVISIBLE);
         btnProximo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +91,7 @@ public class Cadastro extends AppCompatActivity {
                 } else {
                     if (cliente.isChecked()) {
 
-                        Pagina1.setVisibility(View.INVISIBLE);
+                        emailSenha.setVisibility(View.INVISIBLE);
                         Pagina2.setVisibility(View.VISIBLE);
 
                     } else if (empresa.isChecked()) {

@@ -11,8 +11,10 @@ import android.view.MenuInflater;
 import android.widget.Toast;
 
 import interdisciplinar.com.br.interandroid.adapter.TabAdapterCliente;
+
 import interdisciplinar.com.br.interandroid.fragment.DadosEnderecoClienteFragment;
 import interdisciplinar.com.br.interandroid.helper.SlidingTabLayout;
+import interdisciplinar.com.br.interandroid.model.Usuario;
 
 
 public class CadastroCliente extends AppCompatActivity {
@@ -23,7 +25,14 @@ public class CadastroCliente extends AppCompatActivity {
     public static String email;
     public static String senha;
     public static String perfil;
+    public static Usuario usuario;
 
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +43,15 @@ public class CadastroCliente extends AppCompatActivity {
         slidingTabLayout = (SlidingTabLayout) findViewById(R.id.tabLayoutCliente);
         viewPager = (ViewPager) findViewById(R.id.vpPaginaCliente);
 
+        usuario = new Usuario();
+
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
+        usuario.setEmail(bundle.getString("email"));
+        usuario.setSenha(bundle.getString("senha"));
+        usuario.setPerfil(bundle.getString("perfil"));
+
 
 //        Log.i("teste", String.valueOf(bundle));
 //        String teste = "teste;";

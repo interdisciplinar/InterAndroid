@@ -14,6 +14,7 @@ import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import interdisciplinar.com.br.interandroid.CadastroCliente;
 import interdisciplinar.com.br.interandroid.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */

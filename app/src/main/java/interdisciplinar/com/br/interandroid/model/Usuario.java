@@ -7,22 +7,31 @@ import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
 
 public class Usuario {
 
+    //usuario
     private String id;
     private String email;
     private String senha;
     private String nome;
     private String sobrenome;
     private String sexo;
+
+    //endereco
     private String endereco;
     private String complemento;
     private String bairro;
     private String cidade;
     private String estado;
     private String pais;
-    private int cpf;
+    private String perfil;
+
+    private int cpf; // usuario
+
+    //contaato
     private int telefone;
     private int celular;
-    private int cep;
+
+    //endereco
+    private int cep; // Endereco
     private int numero;
 
 
@@ -170,6 +179,14 @@ public class Usuario {
 
     public void setNumero(int numero) {
         this.numero = numero;
+    }
+
+    public String getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 }
 

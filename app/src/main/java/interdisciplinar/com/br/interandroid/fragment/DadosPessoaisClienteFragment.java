@@ -2,6 +2,7 @@ package interdisciplinar.com.br.interandroid.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 
 import java.net.URISyntaxException;
 
+import interdisciplinar.com.br.interandroid.CadastroCliente;
 import interdisciplinar.com.br.interandroid.R;
 
 /**
@@ -29,9 +31,7 @@ public class DadosPessoaisClienteFragment extends Fragment {
     private EditText celular;
     private RadioButton masculino;
     private RadioButton feminino;
-    private String Email;
-    private String Senha;
-    private Button btnProximo;
+    private int aux = 0;
 
 
     public DadosPessoaisClienteFragment() {
@@ -65,6 +65,32 @@ public class DadosPessoaisClienteFragment extends Fragment {
         SimpleMaskFormatter simpleMaskCPF = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
         MaskTextWatcher maskCPF = new MaskTextWatcher(cpf, simpleMaskCPF);
         cpf.addTextChangedListener(maskCPF);
+
+        nome.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (aux != 0) {
+                    CadastroCliente.usuario.setNome(nome.getText().toString());
+                 aux = 0;
+                }
+                if (b) {
+                    aux++;
+                }
+            }
+        });
+
+        sobrenome.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (aux != 0) {
+                    CadastroCliente.usuario.setSobrenome(sobrenome.getText().toString());
+                    aux = 0;
+                }
+                if (b) {
+                    aux++;
+                }
+            }
+        });
 
 
         return view;

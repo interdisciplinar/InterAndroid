@@ -51,7 +51,7 @@
     <string name="tituloErroLogin">Erro ao fazer Login</string>
     <string name="contaInexixtente">Conta inexistente ou desativada</string>
     <string name="senhaIncorreta">Senha incorreta</string>
-
+    <string name="Proximo">Proximo</string>
 
     <string-array name="Servicos">
         <item>Pé e mão</item>

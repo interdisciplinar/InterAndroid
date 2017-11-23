@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -37,11 +38,13 @@ public class Cadastro extends AppCompatActivity {
     private EditText confirmarSenha;
     private RadioButton cliente;
     private RadioButton empresa;
-    private Button botaoCadastrar;
+    private Button btnProximo;
     private Usuario usuario;
     private FirebaseAuth autenticacao;
     public String tituloErro;
     private String msgErro;
+    private LinearLayout Pagina1;
+    private LinearLayout Pagina2;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -54,16 +57,23 @@ public class Cadastro extends AppCompatActivity {
         confirmarSenha = (EditText) findViewById(R.id.txtConfSenha);
         cliente = (RadioButton) findViewById(R.id.rbCliente);
         empresa = (RadioButton) findViewById(R.id.rbEmpresa);
-        botaoCadastrar = (Button) findViewById(R.id.btnCadastrar);
+        btnProximo = (Button) findViewById(R.id.btnProximo);
 
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
         tituloErro = getString(R.string.tituloErroCadastro);
 
+        Pagina1 = (LinearLayout) findViewById(R.id.Pagina1);
+        Pagina2 = (LinearLayout) findViewById(R.id.Pagina2);
 
-        botaoCadastrar.setOnClickListener(new View.OnClickListener() {
+        Pagina1.setVisibility(View.VISIBLE);
+        Pagina2.setVisibility(View.INVISIBLE);
+        btnProximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Pagina1.setVisibility(View.INVISIBLE);
+                Pagina2.setVisibility(View.VISIBLE);
 
                 usuario = new Usuario();
                 usuario.setEmail(email.getText().toString());

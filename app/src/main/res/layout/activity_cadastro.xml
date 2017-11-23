@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Fundo_Branco"
@@ -9,7 +9,13 @@
     <include
         android:id="@+id/toolbarTituloApp"
         layout="@layout/toolbar" />
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/FacaCadastro"
+        android:textAlignment="center"
+        android:textColor="@color/Fonte"
+        android:textSize="@dimen/txtTituloValue" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,15 +26,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/FacaCadastro"
-                android:textAlignment="center"
-                android:textColor="@color/Fonte"
-                android:textSize="@dimen/txtTituloValue" />
+            android:orientation="vertical"
+            android:id="@+id/Pagina1">
 
             <EditText
                 android:id="@+id/txtEmailCadastro"
@@ -91,15 +90,104 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/btnCadastrar"
+                android:id="@+id/btnProximo"
                 style="@style/Widget.AppCompat.Button.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/espacoCampoLogin"
-                android:text="@string/Cadastrar" />
+                android:text="@string/Proximo" />
 
         </LinearLayout>
 
     </ScrollView>
 
-</LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:id="@+id/Pagina2">
+
+            <EditText
+                android:id="@+id/txtPNomeCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/PNome"
+                android:inputType="textAutoComplete" />
+
+            <EditText
+                android:id="@+id/txtSNomeCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/SNome"
+                android:inputType="textAutoComplete" />
+
+            <EditText
+                android:id="@+id/txtCPFCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/CPF"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/txtTelefoneCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Telefone"
+                android:inputType="number" />
+
+            <EditText
+                android:id="@+id/txtCelularCliente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Celular"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Sexo"
+                android:textSize="18dp"
+                android:paddingLeft="5dp"/>
+
+            <RadioGroup
+                android:id="@+id/radioGrupoSexoCliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbMasculinoCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginStart="50dp"
+                    android:text="@string/Masculino" />
+
+                <RadioButton
+                    android:id="@+id/rbFemininoCliente"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
+                    android:text="@string/Feminino" />
+            </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/Termos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/termosDeUso"
+                android:layout_gravity="left" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

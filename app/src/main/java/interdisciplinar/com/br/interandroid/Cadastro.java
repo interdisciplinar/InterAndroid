@@ -72,9 +72,6 @@ public class Cadastro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Pagina1.setVisibility(View.INVISIBLE);
-                Pagina2.setVisibility(View.VISIBLE);
-
                 usuario = new Usuario();
                 usuario.setEmail(email.getText().toString());
                 usuario.setSenha(senha.getText().toString());
@@ -94,7 +91,8 @@ public class Cadastro extends AppCompatActivity {
                 } else {
                     if (cliente.isChecked()) {
 
-                        cadastrarUsuario(cliente);
+                        Pagina1.setVisibility(View.INVISIBLE);
+                        Pagina2.setVisibility(View.VISIBLE);
 
                     } else if (empresa.isChecked()) {
 

@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -16,7 +17,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,7 +25,6 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
-
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
 import interdisciplinar.com.br.interandroid.helper.MsgDialog;
 import interdisciplinar.com.br.interandroid.model.Empresa;
@@ -68,7 +67,7 @@ public class Cadastro extends AppCompatActivity {
     private EditText txtCidade;
     private EditText txtEstado;
     private EditText txtPais;
-    private Button btnCadastrarCliente;
+    private Button btnSaveCliente;
 
     //Lauout dadosEmpresa
     private EditText  txtNomeEmpresa;
@@ -96,6 +95,7 @@ public class Cadastro extends AppCompatActivity {
 
     private Usuario usuario;
     private Empresa empresa;
+
     private FirebaseAuth autenticacao;
     public String tituloErro;
     private String msgErro;
@@ -206,11 +206,13 @@ public class Cadastro extends AppCompatActivity {
         txtCidade = (EditText) findViewById(R.id.txtCidade);
         txtEstado = (EditText) findViewById(R.id.txtEstado);
         txtPais = (EditText) findViewById(R.id.txtPais);
-        btnCadastrarCliente = (Button) findViewById(R.id.btnCadastrarCliente);
+        btnSaveCliente = (Button) findViewById(R.id.btnSaveCliente);
 
-        btnCadastrarCliente.setOnClickListener(new View.OnClickListener() {
+        btnSaveCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.i("Unifebe","cfgvhbjnk");
+
                 usuario.setTxtPNomeCliente(txtPNomeCliente.getText().toString());
                 usuario.setTxtPNomeCliente(txtSNomeCliente.getText().toString());
                 usuario.setTxtCPFCliente(txtCPFCliente.getText().toString());
@@ -245,6 +247,10 @@ public class Cadastro extends AppCompatActivity {
                     Toast.makeText(Cadastro.this, getString(R.string.AceiteTermos), Toast.LENGTH_LONG).show();
                 }
                 usuario.setTermos(termos);
+                Log.i("Unifebe","cfgvhbjnkjhgfhjyklk"+usuario.getTxtEmailCadastro());
+
+                cadastrarUsuario();
+
             }
         });
 
@@ -254,7 +260,7 @@ public class Cadastro extends AppCompatActivity {
         txtCNPJ = (EditText) findViewById(R.id.txtCNPJ);
         txtTelefoneEmpresa = (EditText) findViewById(R.id.txtTelefoneEmpresa);
         txtCelularEmpresa= (EditText) findViewById(R.id.txtCelularEmpresa);
-        btnDadosEmpresa = (Button) findViewById(R.id.btnCadastrarCliente);
+        btnDadosEmpresa = (Button) findViewById(R.id.btnDadosEmpresa);
 
         btnDadosEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -275,7 +281,7 @@ public class Cadastro extends AppCompatActivity {
         txtPaisEmpresa = (EditText) findViewById(R.id.txtPaisEmpresa);
         Servico1 = (CheckBox) findViewById(R.id.Servico1);
         Servico2 = (CheckBox) findViewById(R.id.Servico2);
-        btnCadastrarEmpresa = (Button) findViewById(R.id.btnCadastrarCliente);
+        btnCadastrarEmpresa = (Button) findViewById(R.id.btnCadastrarEmpresa);
 
         btnCadastrarEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -315,8 +321,7 @@ public class Cadastro extends AppCompatActivity {
         return true;
     }
 
-    private void cadastrarUsuario(final RadioButton perfil) {
-
+    private void cadastrarUsuario() {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
                 usuario.getTxtEmailCadastro(),
@@ -326,22 +331,22 @@ public class Cadastro extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
 
-                    Bundle bundle = new Bundle();
-                    bundle.putString("email", txtEmailCadastro.getText().toString());
-                    bundle.putString("senha", txtSenhaCadastro.getText().toString());
-                    bundle.putString("perfil", perfil.getText().toString());
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("email", txtEmailCadastro.getText().toString());
+//                    bundle.putString("senha", txtSenhaCadastro.getText().toString());
+//                    bundle.putString("perfil", perfil.getText().toString());
 
-                    if (perfil.equals(rbCliente)) {
+//                    if (perfil.equals(rbCliente)) {
 //                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
 //                        intent.putExtras(bundle);
 //                        startActivity(intent);
 //                        finish();
-                    } else {
+//                    } else {
 //                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
 //                        intent.putExtras(bundle);
 //                        startActivity(intent);
 //                        finish();
-                    }
+//                    }
 
                     Toast.makeText(Cadastro.this, getString(R.string.sucessoCadastro), Toast.LENGTH_SHORT).show();
 

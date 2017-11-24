@@ -43,6 +43,8 @@
     <string name="senhasDiferentes">Senhas digitadas não são iguais</string>
     <string name="tituloErroCadastro">Erro ao efetuar cadastro</string>
     <string name="semPerfil">Nenhum perfil foi selecionado</string>
+    <string name="semSexo">Nenhum sexo foi selecionado</string>
+
     <string name="senhaFraca">Digite uma senha mais forte</string>
     <string name="emailInvalido">E-mail digitado inválido</string>
     <string name="usuarioExixtente">Usuário já existente</string>

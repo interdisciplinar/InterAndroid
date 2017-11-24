@@ -159,6 +159,7 @@ public class Cadastro extends AppCompatActivity {
 
                 } else {
                     if (rbCliente.isChecked()) {
+
                         perfil = "Cliente";
                         emailSenha.setVisibility(View.INVISIBLE);
                         dadosCliente.setVisibility(View.VISIBLE);
@@ -169,7 +170,7 @@ public class Cadastro extends AppCompatActivity {
                         dadosEmpresa.setVisibility(View.VISIBLE);
 
                     } else {
-                        perfil = "";
+                        //perfil = "";
                         msgErro = getString(R.string.semPerfil);
                         MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
@@ -211,7 +212,6 @@ public class Cadastro extends AppCompatActivity {
         btnSaveCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("Unifebe","cfgvhbjnk");
 
                 usuario.setTxtPNomeCliente(txtPNomeCliente.getText().toString());
                 usuario.setTxtPNomeCliente(txtSNomeCliente.getText().toString());
@@ -236,18 +236,17 @@ public class Cadastro extends AppCompatActivity {
                     sexo = "Feminino";
                 } else {
                     sexo = "";
-                    msgErro = getString(R.string.semPerfil);
+                    msgErro = getString(R.string.semSexo);
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
                 }
                 usuario.setSexo(sexo);
-                if (Termos.isSelected()){
+                if (Termos.isChecked()){
                     termos = "Aceito";
                 } else {
-                    termos = "";
+                    //termos = "";
                     Toast.makeText(Cadastro.this, getString(R.string.AceiteTermos), Toast.LENGTH_LONG).show();
                 }
                 usuario.setTermos(termos);
-                Log.i("Unifebe","cfgvhbjnkjhgfhjyklk"+usuario.getTxtEmailCadastro());
 
                 cadastrarUsuario();
 
@@ -322,32 +321,19 @@ public class Cadastro extends AppCompatActivity {
     }
 
     private void cadastrarUsuario() {
+        Log.i("Inter","email: "+usuario.getTxtEmailCadastro());
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
                 usuario.getTxtEmailCadastro(),
                 usuario.getTxtSenhaCadastro()
         ).addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
+
+
             @Override
+
             public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.i("Inter","entra complet: ");
                 if (task.isSuccessful()) {
-
-//                    Bundle bundle = new Bundle();
-//                    bundle.putString("email", txtEmailCadastro.getText().toString());
-//                    bundle.putString("senha", txtSenhaCadastro.getText().toString());
-//                    bundle.putString("perfil", perfil.getText().toString());
-
-//                    if (perfil.equals(rbCliente)) {
-//                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
-//                        intent.putExtras(bundle);
-//                        startActivity(intent);
-//                        finish();
-//                    } else {
-//                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
-//                        intent.putExtras(bundle);
-//                        startActivity(intent);
-//                        finish();
-//                    }
-
                     Toast.makeText(Cadastro.this, getString(R.string.sucessoCadastro), Toast.LENGTH_SHORT).show();
 
                     FirebaseUser usuarioFirebase = task.getResult().getUser();
@@ -371,8 +357,11 @@ public class Cadastro extends AppCompatActivity {
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                 }
+                Log.i("Inter","complet: "+usuario.getTxtSenhaCadastro());
+
             }
         });
+        Log.i("Inter","fim: "+usuario.getTxtSenhaCadastro());
     }
 
 }

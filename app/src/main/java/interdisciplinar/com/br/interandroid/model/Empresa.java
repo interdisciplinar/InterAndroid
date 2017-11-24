@@ -5,12 +5,17 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 
+import com.google.firebase.database.DatabaseReference;
+
+import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
+
 /**
  * Created by JoseRenato on 23/11/17.
  */
 
 public class Empresa {
 
+    private String id;
     //Layout emailSenha
     private String txtEmailCadastro;
     private String txtSenhaCadastro;
@@ -37,6 +42,18 @@ public class Empresa {
 
 
     public Empresa() {
+    }
+    public void salvar() {
+        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        referenciaFirebase.child("empresa").child(getId()).setValue(this);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTxtEmailCadastro() {

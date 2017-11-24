@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -26,84 +27,282 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
-import interdisciplinar.com.br.interandroid.fragment.DadosPessoaisClienteFragment;
 import interdisciplinar.com.br.interandroid.helper.MsgDialog;
+import interdisciplinar.com.br.interandroid.model.Empresa;
 import interdisciplinar.com.br.interandroid.model.Usuario;
 
 public class Cadastro extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private EditText email;
-    private EditText senha;
-    private EditText confirmarSenha;
-    private RadioButton cliente;
-    private RadioButton empresa;
+
+    //Layout emailSenha
+    private EditText txtEmailCadastro;
+    private EditText txtSenhaCadastro;
+    private EditText txtConfSenha;
+    private RadioButton rbCliente;
+    private RadioButton rbEmpresa;
     private Button btnProximo;
+
+    private String perfil;
+
+    //Layout dadosCliente
+    private EditText txtPNomeCliente;
+    private EditText txtSNomeCliente;
+    private EditText txtCPFCliente;
+    private EditText txtTelefoneCliente;
+    private EditText txtCelularCliente;
+    private RadioButton rbMasculinoCliente;
+    private RadioButton rbFemininoCliente;
+    private CheckBox Termos;
+    private Button btnDadosCliente;
+
+    private String termos;
+    private String sexo;
+
+    //Layout endereçoCliente
+    private EditText txtCEPCliente;
+    private EditText txtEndereco;
+    private EditText txtNumero;
+    private EditText txtComplemento;
+    private EditText txtBairro;
+    private EditText txtCidade;
+    private EditText txtEstado;
+    private EditText txtPais;
+    private Button btnCadastrarCliente;
+
+    //Lauout dadosEmpresa
+    private EditText  txtNomeEmpresa;
+    private EditText  txtNomeProprietarioEmpresa;
+    private EditText  txtCNPJ;
+    private EditText  txtTelefoneEmpresa;
+    private EditText  txtCelularEmpresa;
+    private Button btnDadosEmpresa;
+
+    //Lauout endereçoEmpresa
+    private EditText txtCEPEmpresa;
+    private EditText txtEnderecoEmpresa;
+    private EditText txtNumeroEmpresa;
+    private EditText txtComplementoEmpresa;
+    private EditText txtBairroEmpresa;
+    private EditText txtCidadeEmpresa;
+    private EditText txtEstadoEmpresa;
+    private EditText txtPaisEmpresa;
+    private CheckBox Servico1;
+    private CheckBox Servico2;
+    private Button btnCadastrarEmpresa;
+
+    private String servico1;
+    private String servico2;
+
     private Usuario usuario;
+    private Empresa empresa;
     private FirebaseAuth autenticacao;
     public String tituloErro;
     private String msgErro;
     private LinearLayout emailSenha;
-    private LinearLayout Pagina2;
+    private LinearLayout dadosCliente;
+    private LinearLayout enderecoCliente;
+    private LinearLayout dadosEmpresa;
+    private LinearLayout enderecoEmpresa;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
-        email = (EditText) findViewById(R.id.txtEmailCadastro);
-        senha = (EditText) findViewById(R.id.txtSenhaCadastro);
-        confirmarSenha = (EditText) findViewById(R.id.txtConfSenha);
-        cliente = (RadioButton) findViewById(R.id.rbCliente);
-        empresa = (RadioButton) findViewById(R.id.rbEmpresa);
-        btnProximo = (Button) findViewById(R.id.btnProximo);
+        //instancia DAO
+        usuario = new Usuario();
+        empresa = new Empresa();
 
+
+        //Inicia Toolbar
+        toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
         tituloErro = getString(R.string.tituloErroCadastro);
 
-        emailSenha = (LinearLayout) findViewById(R.id.Pagina1);
-        Pagina2 = (LinearLayout) findViewById(R.id.Pagina2);
+        //Inicia a classe com o Layout emailSenha
+        emailSenha = (LinearLayout) findViewById(R.id.emailSenha);
+        dadosCliente = (LinearLayout) findViewById(R.id.dadosCliente);
+        enderecoCliente = (LinearLayout) findViewById(R.id.enderecoCliente);
+        dadosEmpresa = (LinearLayout) findViewById(R.id.dadosEmpresa);
+        enderecoEmpresa = (LinearLayout) findViewById(R.id.enderecoEmpresa);
 
         emailSenha.setVisibility(View.VISIBLE);
-        Pagina2.setVisibility(View.INVISIBLE);
+        dadosCliente.setVisibility(View.INVISIBLE);
+        enderecoCliente.setVisibility(View.INVISIBLE);
+        dadosEmpresa.setVisibility(View.INVISIBLE);
+        enderecoEmpresa.setVisibility(View.INVISIBLE);
+
+        //Inicia dados emailSenha
+        txtEmailCadastro = (EditText) findViewById(R.id.txtEmailCadastro);
+        txtSenhaCadastro = (EditText) findViewById(R.id.txtSenhaCadastro);
+        txtConfSenha = (EditText) findViewById(R.id.txtConfSenha);
+        rbCliente = (RadioButton) findViewById(R.id.rbCliente);
+        rbEmpresa = (RadioButton) findViewById(R.id.rbEmpresa);
+        btnProximo = (Button) findViewById(R.id.btnProximo);
+
         btnProximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                usuario = new Usuario();
-                usuario.setEmail(email.getText().toString());
-                usuario.setSenha(senha.getText().toString());
-
                 //Verificar se todos os campos estão preenchidos
-                if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
+                if (txtEmailCadastro.getText().toString().isEmpty() || txtSenhaCadastro.getText().toString().isEmpty()) {
 
                     msgErro = getString(R.string.emailOuSenhaNaoPreenchido);
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                     //Verifica se as senhas digitadas são iguais
-                } else if (!senha.getText().toString().equals(confirmarSenha.getText().toString())) {
+                } else if (!txtSenhaCadastro.getText().toString().equals(txtConfSenha.getText().toString())) {
 
                     msgErro = getString(R.string.senhasDiferentes);
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                 } else {
-                    if (cliente.isChecked()) {
-
+                    if (rbCliente.isChecked()) {
+                        perfil = "Cliente";
                         emailSenha.setVisibility(View.INVISIBLE);
-                        Pagina2.setVisibility(View.VISIBLE);
+                        dadosCliente.setVisibility(View.VISIBLE);
 
-                    } else if (empresa.isChecked()) {
-
-                        cadastrarUsuario(empresa);
+                    } else if (rbEmpresa.isChecked()) {
+                        perfil = "Empresa";
+                        emailSenha.setVisibility(View.INVISIBLE);
+                        dadosEmpresa.setVisibility(View.VISIBLE);
 
                     } else {
-
+                        perfil = "";
                         msgErro = getString(R.string.semPerfil);
                         MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                     }
+                }
+            }
+        });
+
+        //Inicia dados dadosCliente
+        txtPNomeCliente = (EditText) findViewById(R.id.txtPNomeCliente);
+        txtSNomeCliente = (EditText) findViewById(R.id.txtSNomeCliente);
+        txtCPFCliente = (EditText) findViewById(R.id.txtCPFCliente);
+        txtTelefoneCliente = (EditText) findViewById(R.id.txtTelefoneCliente);
+        txtCelularCliente = (EditText) findViewById(R.id.txtCelularCliente);
+        rbMasculinoCliente = (RadioButton) findViewById(R.id.rbMasculinoCliente);
+        rbFemininoCliente = (RadioButton) findViewById(R.id.rbFemininoCliente);
+        Termos = (CheckBox) findViewById(R.id.Termos);
+        btnDadosCliente = (Button) findViewById(R.id.btnDadosCliente);
+
+        btnDadosCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dadosCliente.setVisibility(View.INVISIBLE);
+                enderecoCliente.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //Inicia dados enderecoCliente
+        txtCEPCliente = (EditText) findViewById(R.id.txtCEPCliente);
+        txtEndereco = (EditText) findViewById(R.id.txtEndereco);
+        txtNumero = (EditText) findViewById(R.id.txtNumero);
+        txtComplemento = (EditText) findViewById(R.id.txtComplemento);
+        txtBairro = (EditText) findViewById(R.id.txtBairro);
+        txtCidade = (EditText) findViewById(R.id.txtCidade);
+        txtEstado = (EditText) findViewById(R.id.txtEstado);
+        txtPais = (EditText) findViewById(R.id.txtPais);
+        btnCadastrarCliente = (Button) findViewById(R.id.btnCadastrarCliente);
+
+        btnCadastrarCliente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                usuario.setTxtPNomeCliente(txtPNomeCliente.getText().toString());
+                usuario.setTxtPNomeCliente(txtSNomeCliente.getText().toString());
+                usuario.setTxtCPFCliente(txtCPFCliente.getText().toString());
+                usuario.setTxtTelefoneCliente(txtTelefoneCliente.getText().toString());
+                usuario.setTxtCelularCliente(txtCelularCliente.getText().toString());
+                usuario.setTxtCEPCliente(txtCEPCliente.getText().toString());
+                usuario.setTxtEndereco(txtEndereco.getText().toString());
+                usuario.setTxtNumero(txtNumero.getText().toString());
+                usuario.setTxtComplemento(txtComplemento.getText().toString());
+                usuario.setTxtBairro(txtBairro.getText().toString());
+                usuario.setTxtCidade(txtCidade.getText().toString());
+                usuario.setTxtEstado(txtEstado.getText().toString());
+                usuario.setTxtPais(txtPais.getText().toString());
+                usuario.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
+                usuario.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
+                usuario.setPerfil(perfil);
+                if (rbMasculinoCliente.isChecked()) {
+                    sexo = "Masculino";
+
+                } else if (rbFemininoCliente.isChecked()) {
+                    sexo = "Feminino";
+                } else {
+                    sexo = "";
+                    msgErro = getString(R.string.semPerfil);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+                }
+                usuario.setSexo(sexo);
+                if (Termos.isSelected()){
+                    termos = "Aceito";
+                } else {
+                    termos = "";
+                    Toast.makeText(Cadastro.this, getString(R.string.AceiteTermos), Toast.LENGTH_LONG).show();
+                }
+                usuario.setTermos(termos);
+            }
+        });
+
+        //Inicia dados dadosEmpresa
+        txtNomeEmpresa = (EditText) findViewById(R.id.txtNomeEmpresa);
+        txtNomeProprietarioEmpresa = (EditText) findViewById(R.id.txtNomeProprietarioEmpresa);
+        txtCNPJ = (EditText) findViewById(R.id.txtCNPJ);
+        txtTelefoneEmpresa = (EditText) findViewById(R.id.txtTelefoneEmpresa);
+        txtCelularEmpresa= (EditText) findViewById(R.id.txtCelularEmpresa);
+        btnDadosEmpresa = (Button) findViewById(R.id.btnCadastrarCliente);
+
+        btnDadosEmpresa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dadosEmpresa.setVisibility(View.INVISIBLE);
+                enderecoEmpresa.setVisibility(View.VISIBLE);
+            }
+        });
+
+        //Inicia dados endereçoEmpresa
+        txtCEPEmpresa = (EditText) findViewById(R.id.txtCEPEmpresa);
+        txtEnderecoEmpresa = (EditText) findViewById(R.id.txtEnderecoEmpresa);
+        txtNumeroEmpresa = (EditText) findViewById(R.id.txtNumeroEmpresa);
+        txtComplementoEmpresa = (EditText) findViewById(R.id.txtComplementoEmpresa);
+        txtBairroEmpresa = (EditText) findViewById(R.id.txtBairroEmpresa);
+        txtCidadeEmpresa = (EditText) findViewById(R.id.txtCidadeEmpresa);
+        txtEstadoEmpresa = (EditText) findViewById(R.id.txtEstadoEmpresa);
+        txtPaisEmpresa = (EditText) findViewById(R.id.txtPaisEmpresa);
+        Servico1 = (CheckBox) findViewById(R.id.Servico1);
+        Servico2 = (CheckBox) findViewById(R.id.Servico2);
+        btnCadastrarEmpresa = (Button) findViewById(R.id.btnCadastrarCliente);
+
+        btnCadastrarEmpresa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                empresa.setTxtNomeEmpresa(txtNomeEmpresa.getText().toString());
+                empresa.setTxtNomeProprietarioEmpresa(txtNomeProprietarioEmpresa.getText().toString());
+                empresa.setTxtCNPJ(txtCNPJ.getText().toString());
+                empresa.setTxtTelefoneEmpresa(txtTelefoneEmpresa.getText().toString());
+                empresa.setTxtCelularEmpresa(txtCelularEmpresa.getText().toString());
+                empresa.setTxtCEPEmpresa(txtCEPEmpresa.getText().toString());
+                empresa.setTxtEnderecoEmpresa(txtEnderecoEmpresa.getText().toString());
+                empresa.setTxtNumeroEmpresa(txtNumeroEmpresa.getText().toString());
+                empresa.setTxtComplementoEmpresa(txtComplementoEmpresa.getText().toString());
+                empresa.setTxtBairroEmpresa(txtBairroEmpresa.getText().toString());
+                empresa.setTxtCidadeEmpresa(txtCidadeEmpresa.getText().toString());
+                empresa.setTxtEstadoEmpresa(txtEstadoEmpresa.getText().toString());
+                empresa.setTxtPaisEmpresa(txtPaisEmpresa.getText().toString());
+                empresa.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
+                empresa.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
+                empresa.setPerfil(perfil);
+                if (Servico1.isSelected()){
+                    servico1 = "Sim";
+                    empresa.setServico1(servico1);
+                }
+                if (Servico2.isSelected()){
+                    servico2 = "Sim";
+                    empresa.setServico2(servico2);
                 }
             }
         });
@@ -120,28 +319,28 @@ public class Cadastro extends AppCompatActivity {
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
-                usuario.getEmail(),
-                usuario.getSenha()
+                usuario.getTxtEmailCadastro(),
+                usuario.getTxtSenhaCadastro()
         ).addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
 
                     Bundle bundle = new Bundle();
-                    bundle.putString("email", email.getText().toString());
-                    bundle.putString("senha", senha.getText().toString());
+                    bundle.putString("email", txtEmailCadastro.getText().toString());
+                    bundle.putString("senha", txtSenhaCadastro.getText().toString());
                     bundle.putString("perfil", perfil.getText().toString());
 
-                    if (perfil.equals(cliente)) {
-                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        finish();
+                    if (perfil.equals(rbCliente)) {
+//                        Intent intent = new Intent(Cadastro.this, CadastroCliente.class);
+//                        intent.putExtras(bundle);
+//                        startActivity(intent);
+//                        finish();
                     } else {
-                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
-                        intent.putExtras(bundle);
-                        startActivity(intent);
-                        finish();
+//                        Intent intent = new Intent(Cadastro.this, CadastroEmp.class);
+//                        intent.putExtras(bundle);
+//                        startActivity(intent);
+//                        finish();
                     }
 
                     Toast.makeText(Cadastro.this, getString(R.string.sucessoCadastro), Toast.LENGTH_SHORT).show();

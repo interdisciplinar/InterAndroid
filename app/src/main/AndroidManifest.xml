@@ -23,11 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CadastroEmp" />
         <activity android:name=".Capa_Empresa" />
         <activity android:name=".Agenda" />
         <activity android:name=".Cadastro" />
-        <activity android:name=".CadastroCliente" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

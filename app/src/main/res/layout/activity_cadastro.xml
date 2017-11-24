@@ -200,7 +200,7 @@
                     android:text="@string/termosDeUso" />
 
                 <Button
-                    android:id="@+id/btnProximo2"
+                    android:id="@+id/btnDadosCliente"
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -333,12 +333,12 @@
                     android:hint="@string/CNPJ"
                     android:inputType="text" />
 
-                <EditText
-                    android:id="@+id/txtSenhaEmpresa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/senha"
-                    android:inputType="textPassword" />
+                <!--<EditText-->
+                    <!--android:id="@+id/txtSenhaEmpresa"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/senha"-->
+                    <!--android:inputType="textPassword" />-->
 
                 <EditText
                     android:id="@+id/txtTelefoneEmpresa"
@@ -353,6 +353,13 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/Celular"
                     android:inputType="number" />
+
+                <Button
+                    android:id="@+id/btnDadosEmpresa"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Proximo" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
@@ -456,7 +463,7 @@
                     style="@style/Widget.AppCompat.Button.Colored"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Cadastrar" />
+                    android:text="@string/Salvar" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

@@ -52,6 +52,7 @@
     <string name="contaInexixtente">Conta inexistente ou desativada</string>
     <string name="senhaIncorreta">Senha incorreta</string>
     <string name="Proximo">Proximo</string>
+    <string name="AceiteTermos">Você não aceitou os termos!</string>
 
     <string-array name="Servicos">
         <item>Pé e mão</item>

@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 usuario = new Usuario();
-                usuario.setEmail(email.getText().toString());
-                usuario.setSenha(senha.getText().toString());
+                usuario.setTxtEmailCadastro(email.getText().toString());
+                usuario.setTxtSenhaCadastro(senha.getText().toString());
 
                 if (email.getText().toString().isEmpty() || senha.getText().toString().isEmpty()) {
 
@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
     private void validarLogin() {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.signInWithEmailAndPassword(
-                usuario.getEmail(),
-                usuario.getSenha()
+                usuario.getTxtEmailCadastro(),
+                usuario.getTxtSenhaCadastro()
         ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

@@ -1,49 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="@color/Fundo_Branco">
+    android:background="@color/Fundo_Branco"
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <ImageButton
-        android:id="@+id/Agendamento"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/stat_notify_sdcard"
-        android:scaleType="fitEnd"
-        android:tint="@android:drawable/screen_background_dark_transparent"
-        app:srcCompat="@drawable/ic_agenda" />
+        android:background="#123561"
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/Mapa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_map"
-        android:background="@android:drawable/stat_notify_sdcard"
-        android:scaleType="fitEnd"
-        android:tint="@android:drawable/screen_background_dark_transparent"
-        />
+        <ImageButton
+            android:id="@+id/btnMapa"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitEnd"
+            android:tint="@android:drawable/screen_background_dark_transparent"
+            app:srcCompat="@drawable/ic_mapa" />
+    </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/Buscar"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_lupa"
-        android:background="@android:drawable/stat_notify_sdcard"
-        android:scaleType="fitEnd"
-        android:tint="@android:drawable/screen_background_dark_transparent"
-        />
-    <ImageButton
-        android:id="@+id/Recentes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_action_database"
-        android:background="@android:drawable/stat_notify_sdcard"
-        android:scaleType="fitEnd"
-        android:tint="@android:drawable/screen_background_dark_transparent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal">
 
-        />
+        <ImageButton
+            android:id="@+id/Agendamento"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitEnd"
+            android:tint="@android:drawable/screen_background_dark_transparent"
+            app:srcCompat="@drawable/ic_agendaw" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/Buscar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/ic_buscar" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/Recentes"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/ic_history" />
+    </LinearLayout>
+    />
     />
 </LinearLayout>

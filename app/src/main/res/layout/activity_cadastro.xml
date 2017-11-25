@@ -14,10 +14,10 @@
         layout="@layout/toolbar" />
 
     <LinearLayout
+        android:id="@+id/emailSenha"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarTituloApp"
-        android:id="@+id/emailSenha">
+        android:layout_below="@id/toolbarTituloApp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -110,10 +110,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/dadosCliente"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarTituloApp"
-        android:id="@+id/dadosCliente">
+        android:layout_below="@id/toolbarTituloApp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -193,7 +193,7 @@
                 </RadioGroup>
 
                 <CheckBox
-                    android:id="@+id/Termos"
+                    android:id="@+id/ckBoxTermos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left"
@@ -212,13 +212,15 @@
 
 
     <LinearLayout
+        android:id="@+id/enderecoCliente"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarTituloApp"
-        android:id="@+id/enderecoCliente">
+        android:layout_below="@id/toolbarTituloApp">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -298,13 +300,15 @@
 
 
     <LinearLayout
+        android:id="@+id/dadosEmpresa"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarTituloApp"
-        android:id="@+id/dadosEmpresa">
+        android:layout_below="@id/toolbarTituloApp">
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -334,11 +338,11 @@
                     android:inputType="text" />
 
                 <!--<EditText-->
-                    <!--android:id="@+id/txtSenhaEmpresa"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:hint="@string/senha"-->
-                    <!--android:inputType="textPassword" />-->
+                <!--android:id="@+id/txtSenhaEmpresa"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="@string/senha"-->
+                <!--android:inputType="textPassword" />-->
 
                 <EditText
                     android:id="@+id/txtTelefoneEmpresa"
@@ -365,14 +369,15 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/enderecoEmpresa"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbarTituloApp"
-        android:id="@+id/enderecoEmpresa">
+        android:layout_below="@id/toolbarTituloApp">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -442,22 +447,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Selecione os serviços prestados:"
-                    android:layout_gravity="left"/>
+                    android:layout_gravity="left"
+                    android:text="Selecione os serviços prestados:" />
+
                 <CheckBox
                     android:id="@+id/Servico1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pé e mão"
                     android:layout_gravity="left"
-                    />
+                    android:text="Pé e mão" />
+
                 <CheckBox
                     android:id="@+id/Servico2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Massagem"
                     android:layout_gravity="left"
-                    />
+                    android:text="Massagem" />
+
                 <Button
                     android:id="@+id/btnCadastrarEmpresa"
                     style="@style/Widget.AppCompat.Button.Colored"

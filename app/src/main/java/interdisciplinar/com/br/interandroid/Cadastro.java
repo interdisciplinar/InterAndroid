@@ -17,6 +17,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.github.rtoshiro.util.format.SimpleMaskFormatter;
+import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,6 +28,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
+
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
 import interdisciplinar.com.br.interandroid.helper.MsgDialog;
 import interdisciplinar.com.br.interandroid.model.Empresa;
@@ -41,7 +45,6 @@ public class Cadastro extends AppCompatActivity {
     private RadioButton rbCliente;
     private RadioButton rbEmpresa;
     private Button btnProximo;
-
     private String perfil;
 
     //Layout dadosCliente
@@ -52,11 +55,10 @@ public class Cadastro extends AppCompatActivity {
     private EditText txtCelularCliente;
     private RadioButton rbMasculinoCliente;
     private RadioButton rbFemininoCliente;
-    private CheckBox Termos;
-    private Button btnDadosCliente;
-
-    private String termos;
     private String sexo;
+    private CheckBox ckBoxTermos;
+    private String termos;
+    private Button btnDadosCliente;
 
     //Layout endereçoCliente
     private EditText txtCEPCliente;
@@ -70,11 +72,11 @@ public class Cadastro extends AppCompatActivity {
     private Button btnSaveCliente;
 
     //Lauout dadosEmpresa
-    private EditText  txtNomeEmpresa;
-    private EditText  txtNomeProprietarioEmpresa;
-    private EditText  txtCNPJ;
-    private EditText  txtTelefoneEmpresa;
-    private EditText  txtCelularEmpresa;
+    private EditText txtNomeEmpresa;
+    private EditText txtNomeProprietarioEmpresa;
+    private EditText txtCNPJ;
+    private EditText txtTelefoneEmpresa;
+    private EditText txtCelularEmpresa;
     private Button btnDadosEmpresa;
 
     //Lauout endereçoEmpresa
@@ -93,12 +95,18 @@ public class Cadastro extends AppCompatActivity {
     private String servico1;
     private String servico2;
 
+    //DAO
     private Usuario usuario;
     private Empresa empresa;
 
+    //Firebase
     private FirebaseAuth autenticacao;
+
+    //Mensagens
     public String tituloErro;
     private String msgErro;
+
+    //Layouts
     private LinearLayout emailSenha;
     private LinearLayout dadosCliente;
     private LinearLayout enderecoCliente;
@@ -114,11 +122,11 @@ public class Cadastro extends AppCompatActivity {
         usuario = new Usuario();
         empresa = new Empresa();
 
-
         //Inicia Toolbar
         toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
         toolbar.setTitle(R.string.app_name);
         setSupportActionBar(toolbar);
+
         tituloErro = getString(R.string.tituloErroCadastro);
 
         //Inicia a classe com o Layout emailSenha
@@ -159,21 +167,18 @@ public class Cadastro extends AppCompatActivity {
 
                 } else {
                     if (rbCliente.isChecked()) {
-
-                        perfil = "Cliente";
+                        perfil = rbCliente.getText().toString();
                         emailSenha.setVisibility(View.INVISIBLE);
                         dadosCliente.setVisibility(View.VISIBLE);
 
                     } else if (rbEmpresa.isChecked()) {
-                        perfil = "Empresa";
+                        perfil = rbEmpresa.getText().toString();
                         emailSenha.setVisibility(View.INVISIBLE);
                         dadosEmpresa.setVisibility(View.VISIBLE);
 
                     } else {
-                        //perfil = "";
                         msgErro = getString(R.string.semPerfil);
                         MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
-
                     }
                 }
             }
@@ -187,14 +192,47 @@ public class Cadastro extends AppCompatActivity {
         txtCelularCliente = (EditText) findViewById(R.id.txtCelularCliente);
         rbMasculinoCliente = (RadioButton) findViewById(R.id.rbMasculinoCliente);
         rbFemininoCliente = (RadioButton) findViewById(R.id.rbFemininoCliente);
-        Termos = (CheckBox) findViewById(R.id.Termos);
+        ckBoxTermos = (CheckBox) findViewById(R.id.ckBoxTermos);
         btnDadosCliente = (Button) findViewById(R.id.btnDadosCliente);
+
+        //Máscaras de telefone, celular e CPF
+        SimpleMaskFormatter simpleMaskTelefone = new SimpleMaskFormatter("(NN) NNNN-NNNN");
+        MaskTextWatcher maskTelefone = new MaskTextWatcher(txtTelefoneCliente, simpleMaskTelefone);
+        txtTelefoneCliente.addTextChangedListener(maskTelefone);
+
+        SimpleMaskFormatter simpleMaskCelular = new SimpleMaskFormatter("(NN) NNNNN-NNNN");
+        MaskTextWatcher maskCelular = new MaskTextWatcher(txtCelularCliente, simpleMaskCelular);
+        txtCelularCliente.addTextChangedListener(maskCelular);
+
+        SimpleMaskFormatter simpleMaskCPF = new SimpleMaskFormatter("NNN.NNN.NNN-NN");
+        MaskTextWatcher maskCPF = new MaskTextWatcher(txtCPFCliente, simpleMaskCPF);
+        txtCPFCliente.addTextChangedListener(maskCPF);
 
         btnDadosCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dadosCliente.setVisibility(View.INVISIBLE);
-                enderecoCliente.setVisibility(View.VISIBLE);
+                if (txtPNomeCliente.getText().toString().isEmpty() ||
+                        txtSNomeCliente.getText().toString().isEmpty() ||
+                        txtCPFCliente.getText().toString().isEmpty() ||
+                        txtTelefoneCliente.getText().toString().isEmpty() ||
+                        txtCelularCliente.getText().toString().isEmpty()) {
+
+                    msgErro = getString(R.string.campoNaoPreenchido);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+
+                } else {
+                    if (rbMasculinoCliente.isChecked()) {
+                        sexo = rbMasculinoCliente.getText().toString();
+
+                    } else if (rbFemininoCliente.isChecked()) {
+                        sexo = rbFemininoCliente.getText().toString();
+                    } else {
+                        msgErro = getString(R.string.semSexo);
+                        MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+                    }
+                    dadosCliente.setVisibility(View.INVISIBLE);
+                    enderecoCliente.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -212,12 +250,18 @@ public class Cadastro extends AppCompatActivity {
         btnSaveCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                usuario.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
+                usuario.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
+                usuario.setPerfil(perfil);
 
                 usuario.setTxtPNomeCliente(txtPNomeCliente.getText().toString());
                 usuario.setTxtPNomeCliente(txtSNomeCliente.getText().toString());
                 usuario.setTxtCPFCliente(txtCPFCliente.getText().toString());
                 usuario.setTxtTelefoneCliente(txtTelefoneCliente.getText().toString());
                 usuario.setTxtCelularCliente(txtCelularCliente.getText().toString());
+                usuario.setSexo(sexo);
+                usuario.setTermos(termos);
+
                 usuario.setTxtCEPCliente(txtCEPCliente.getText().toString());
                 usuario.setTxtEndereco(txtEndereco.getText().toString());
                 usuario.setTxtNumero(txtNumero.getText().toString());
@@ -226,21 +270,10 @@ public class Cadastro extends AppCompatActivity {
                 usuario.setTxtCidade(txtCidade.getText().toString());
                 usuario.setTxtEstado(txtEstado.getText().toString());
                 usuario.setTxtPais(txtPais.getText().toString());
-                usuario.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
-                usuario.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
-                usuario.setPerfil(perfil);
-                if (rbMasculinoCliente.isChecked()) {
-                    sexo = "Masculino";
 
-                } else if (rbFemininoCliente.isChecked()) {
-                    sexo = "Feminino";
-                } else {
-                    sexo = "";
-                    msgErro = getString(R.string.semSexo);
-                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
-                }
+
                 usuario.setSexo(sexo);
-                if (Termos.isChecked()){
+                if (ckBoxTermos.isChecked()) {
                     termos = "Aceito";
                 } else {
                     //termos = "";
@@ -258,7 +291,7 @@ public class Cadastro extends AppCompatActivity {
         txtNomeProprietarioEmpresa = (EditText) findViewById(R.id.txtNomeProprietarioEmpresa);
         txtCNPJ = (EditText) findViewById(R.id.txtCNPJ);
         txtTelefoneEmpresa = (EditText) findViewById(R.id.txtTelefoneEmpresa);
-        txtCelularEmpresa= (EditText) findViewById(R.id.txtCelularEmpresa);
+        txtCelularEmpresa = (EditText) findViewById(R.id.txtCelularEmpresa);
         btnDadosEmpresa = (Button) findViewById(R.id.btnDadosEmpresa);
 
         btnDadosEmpresa.setOnClickListener(new View.OnClickListener() {
@@ -301,11 +334,11 @@ public class Cadastro extends AppCompatActivity {
                 empresa.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
                 empresa.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
                 empresa.setPerfil(perfil);
-                if (Servico1.isSelected()){
+                if (Servico1.isSelected()) {
                     servico1 = "Sim";
                     empresa.setServico1(servico1);
                 }
-                if (Servico2.isSelected()){
+                if (Servico2.isSelected()) {
                     servico2 = "Sim";
                     empresa.setServico2(servico2);
                 }
@@ -321,7 +354,7 @@ public class Cadastro extends AppCompatActivity {
     }
 
     private void cadastrarUsuario() {
-        Log.i("Inter","email: "+usuario.getTxtEmailCadastro());
+        Log.i("Inter", "email: " + usuario.getTxtEmailCadastro());
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
                 usuario.getTxtEmailCadastro(),
@@ -332,7 +365,7 @@ public class Cadastro extends AppCompatActivity {
             @Override
 
             public void onComplete(@NonNull Task<AuthResult> task) {
-                Log.i("Inter","entra complet: ");
+                Log.i("Inter", "entra complet: ");
                 if (task.isSuccessful()) {
                     Toast.makeText(Cadastro.this, getString(R.string.sucessoCadastro), Toast.LENGTH_SHORT).show();
 
@@ -357,11 +390,11 @@ public class Cadastro extends AppCompatActivity {
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                 }
-                Log.i("Inter","complet: "+usuario.getTxtSenhaCadastro());
+                Log.i("Inter", "complet: " + usuario.getTxtSenhaCadastro());
 
             }
         });
-        Log.i("Inter","fim: "+usuario.getTxtSenhaCadastro());
+        Log.i("Inter", "fim: " + usuario.getTxtSenhaCadastro());
     }
 
 }

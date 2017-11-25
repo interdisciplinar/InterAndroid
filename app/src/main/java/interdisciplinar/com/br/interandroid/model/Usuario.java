@@ -17,7 +17,6 @@ public class Usuario {
     //Layout emailSenha
     private String txtEmailCadastro;
     private String txtSenhaCadastro;
-    private String txtConfSenha;
     private String perfil;
 
     //Layout dadosCliente
@@ -27,7 +26,7 @@ public class Usuario {
     private String txtTelefoneCliente;
     private String txtCelularCliente;
     private String sexo;
-    private String Termos;
+    private String termos;
 
     //Layout endereçoCliente
     private String txtCEPCliente;
@@ -69,14 +68,6 @@ public class Usuario {
 
     public void setTxtSenhaCadastro(String txtSenhaCadastro) {
         this.txtSenhaCadastro = txtSenhaCadastro;
-    }
-
-    public String getTxtConfSenha() {
-        return txtConfSenha;
-    }
-
-    public void setTxtConfSenha(String txtConfSenha) {
-        this.txtConfSenha = txtConfSenha;
     }
 
     public String getPerfil() {
@@ -136,11 +127,11 @@ public class Usuario {
     }
 
     public String getTermos() {
-        return Termos;
+        return termos;
     }
 
     public void setTermos(String termos) {
-        Termos = termos;
+        this.termos = termos;
     }
 
     public String getTxtCEPCliente() {
@@ -206,6 +197,7 @@ public class Usuario {
     public void setTxtPais(String txtPais) {
         this.txtPais = txtPais;
     }
+
     //    //usuario
 //    private String id;
 //    private String email;

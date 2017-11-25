@@ -55,6 +55,7 @@
     <string name="senhaIncorreta">Senha incorreta</string>
     <string name="Proximo">Proximo</string>
     <string name="AceiteTermos">Você não aceitou os termos!</string>
+    <string name="campoNaoPreenchido">Algum campo de dados pessoais não foi preenchido</string>
 
     <string-array name="Servicos">
         <item>Pé e mão</item>

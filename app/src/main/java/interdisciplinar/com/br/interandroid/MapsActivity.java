@@ -1,5 +1,7 @@
 package interdisciplinar.com.br.interandroid;
 
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -42,7 +44,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng unifebe = new LatLng(-27.0684183, -48.8850456);
         mMap.addMarker(new MarkerOptions().position(unifebe).title("UNIFEBE"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(unifebe));
-        mMap.setMinZoomPreference(6.0f);
-        mMap.setMaxZoomPreference(14.0f);
+        mMap.setMinZoomPreference(12.0f);
+        mMap.setMaxZoomPreference(20.0f);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
     }
 }

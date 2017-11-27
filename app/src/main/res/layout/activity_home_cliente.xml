@@ -16,55 +16,55 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_alignParentLeft="true"
 
-        >
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbarTituloApp"
+        android:gravity="center">
 
 
-    <ImageButton
-        android:id="@+id/btnMapa"
-        android:layout_width="@dimen/botaoHome"
-        android:layout_height="@dimen/botaoHome"
-        android:scaleType="fitEnd"
-        android:background="@android:color/white"
-        app:srcCompat="@drawable/ic_mapa"
+        <ImageButton
+            android:id="@+id/btnMapa"
+            android:layout_width="@dimen/botaoHome"
+            android:layout_height="@dimen/botaoHome"
+            android:background="@android:color/white"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/ic_mapa"
 
-        />
+            />
 
-    <ImageButton
-        android:id="@+id/Agendamento"
-        android:layout_width="@dimen/botaoHome"
-        android:layout_height="@dimen/botaoHome"
-        android:scaleType="fitEnd"
-        android:tint="@android:drawable/screen_background_dark_transparent"
-        app:srcCompat="@drawable/ic_agendaw"
-        android:layout_below="@+id/btnMapa"
-        android:layout_marginTop="35dp"
-        android:background="@android:color/white"
-        />
+        <ImageButton
+            android:id="@+id/Agendamento"
+            android:layout_width="@dimen/botaoHome"
+            android:layout_height="@dimen/botaoHome"
+            android:layout_below="@+id/btnMapa"
+            android:layout_marginTop="35dp"
+            android:background="@android:color/white"
+            android:scaleType="fitEnd"
+            android:tint="@android:drawable/screen_background_dark_transparent"
+            app:srcCompat="@drawable/ic_agendaw" />
 
-    <ImageButton
-        android:id="@+id/Buscar"
-        android:layout_width="@dimen/botaoHome"
-        android:layout_height="@dimen/botaoHome"
-        android:scaleType="fitEnd"
-        app:srcCompat="@drawable/ic_buscar"
-        android:layout_toRightOf="@+id/btnMapa"
-        android:layout_marginLeft="35dp"
-        android:background="@android:color/white"/>
+        <ImageButton
+            android:id="@+id/Buscar"
+            android:layout_width="@dimen/botaoHome"
+            android:layout_height="@dimen/botaoHome"
+            android:layout_marginLeft="35dp"
+            android:layout_toRightOf="@+id/btnMapa"
+            android:background="@android:color/white"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/ic_buscar" />
 
-    <ImageButton
-        android:id="@+id/Recentes"
-        android:layout_width="@dimen/botaoHome"
-        android:layout_height="@dimen/botaoHome"
-        android:scaleType="fitEnd"
-        app:srcCompat="@drawable/ic_history"
-        android:layout_toRightOf="@+id/Agendamento"
-        android:layout_below="@id/btnMapa"
-        android:layout_marginTop="35dp"
-        android:layout_marginLeft="35dp"
-        android:background="@android:color/white"
-        />
+        <ImageButton
+            android:id="@+id/Recentes"
+            android:layout_width="@dimen/botaoHome"
+            android:layout_height="@dimen/botaoHome"
+            android:layout_below="@id/btnMapa"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="35dp"
+            android:layout_toRightOf="@+id/Agendamento"
+            android:background="@android:color/white"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/ic_history" />
 
     </RelativeLayout>
 </RelativeLayout>

@@ -4,4 +4,5 @@
     <dimen name="txtTituloValue">20sp</dimen>
     <dimen name="txtValue">14dp</dimen>
     <dimen name="espacoCampoLogin">15dp</dimen>
+    <dimen name="botaoHome">100dp</dimen>
 </resources>

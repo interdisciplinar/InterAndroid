@@ -4,15 +4,15 @@
 
     To get one, follow this link, follow the directions and press "Create" at the end:
 
-    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=D1:94:98:D2:55:10:86:A4:19:19:3E:27:40:1F:5E:DF:12:38:7E:42%3Binterdisciplinar.com.br.interandroid
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=BD:2A:05:63:49:59:4E:96:18:9C:FD:B0:1E:A9:7D:B1:B1:29:53:80%3Bmap.unifebe.com.br.map
 
     You can also add your credentials to an existing key, using these values:
 
     Package name:
-    D1:94:98:D2:55:10:86:A4:19:19:3E:27:40:1F:5E:DF:12:38:7E:42
+    BD:2A:05:63:49:59:4E:96:18:9C:FD:B0:1E:A9:7D:B1:B1:29:53:80
 
     SHA-1 certificate fingerprint:
-    D1:94:98:D2:55:10:86:A4:19:19:3E:27:40:1F:5E:DF:12:38:7E:42
+    BD:2A:05:63:49:59:4E:96:18:9C:FD:B0:1E:A9:7D:B1:B1:29:53:80
 
     Alternatively, follow the directions here:
     https://developers.google.com/maps/documentation/android/start#get-key

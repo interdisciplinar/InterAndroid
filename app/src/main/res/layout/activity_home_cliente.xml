@@ -1,69 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Fundo_Branco"
     android:orientation="vertical"
-    android:weightSum="1">
 
-    <LinearLayout
+    >
+
+    <include
+        android:id="@+id/toolbarTituloApp"
+        layout="@layout/toolbar"
+        />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#123561"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:gravity="center"
 
-        <ImageButton
-            android:id="@+id/btnMapa"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitEnd"
-            android:tint="@android:drawable/screen_background_dark_transparent"
-            app:srcCompat="@drawable/ic_mapa" />
-    </LinearLayout>
+        >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/Agendamento"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitEnd"
-            android:tint="@android:drawable/screen_background_dark_transparent"
-            app:srcCompat="@drawable/ic_agendaw" />
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btnMapa"
+        android:layout_width="@dimen/botaoHome"
+        android:layout_height="@dimen/botaoHome"
+        android:scaleType="fitEnd"
+        android:background="@android:color/white"
+        app:srcCompat="@drawable/ic_mapa"
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+        />
 
-        <ImageButton
-            android:id="@+id/Buscar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitEnd"
-            app:srcCompat="@drawable/ic_buscar" />
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/Agendamento"
+        android:layout_width="@dimen/botaoHome"
+        android:layout_height="@dimen/botaoHome"
+        android:scaleType="fitEnd"
+        android:tint="@android:drawable/screen_background_dark_transparent"
+        app:srcCompat="@drawable/ic_agendaw"
+        android:layout_below="@+id/btnMapa"
+        android:layout_marginTop="35dp"
+        android:background="@android:color/white"
+        />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/Buscar"
+        android:layout_width="@dimen/botaoHome"
+        android:layout_height="@dimen/botaoHome"
+        android:scaleType="fitEnd"
+        app:srcCompat="@drawable/ic_buscar"
+        android:layout_toRightOf="@+id/btnMapa"
+        android:layout_marginLeft="35dp"
+        android:background="@android:color/white"/>
 
-        <ImageButton
-            android:id="@+id/Recentes"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitEnd"
-            app:srcCompat="@drawable/ic_history" />
-    </LinearLayout>
-    />
-    />
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/Recentes"
+        android:layout_width="@dimen/botaoHome"
+        android:layout_height="@dimen/botaoHome"
+        android:scaleType="fitEnd"
+        app:srcCompat="@drawable/ic_history"
+        android:layout_toRightOf="@+id/Agendamento"
+        android:layout_below="@id/btnMapa"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="35dp"
+        android:background="@android:color/white"
+        />
+
+    </RelativeLayout>
+</RelativeLayout>

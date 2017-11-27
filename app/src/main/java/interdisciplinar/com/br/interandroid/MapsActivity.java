@@ -42,5 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng unifebe = new LatLng(-27.0684183, -48.8850456);
         mMap.addMarker(new MarkerOptions().position(unifebe).title("UNIFEBE"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(unifebe));
+        mMap.setMinZoomPreference(6.0f);
+        mMap.setMaxZoomPreference(14.0f);
     }
 }

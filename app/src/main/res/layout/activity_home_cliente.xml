@@ -34,7 +34,7 @@
             />
 
         <ImageButton
-            android:id="@+id/Agendamento"
+            android:id="@+id/btnAgendamento"
             android:layout_width="@dimen/botaoHome"
             android:layout_height="@dimen/botaoHome"
             android:layout_below="@+id/btnMapa"
@@ -45,7 +45,7 @@
             app:srcCompat="@drawable/ic_agendaw" />
 
         <ImageButton
-            android:id="@+id/Buscar"
+            android:id="@+id/btnBuscar"
             android:layout_width="@dimen/botaoHome"
             android:layout_height="@dimen/botaoHome"
             android:layout_marginLeft="35dp"
@@ -55,13 +55,13 @@
             app:srcCompat="@drawable/ic_buscar" />
 
         <ImageButton
-            android:id="@+id/Recentes"
+            android:id="@+id/btnRecentes"
             android:layout_width="@dimen/botaoHome"
             android:layout_height="@dimen/botaoHome"
             android:layout_below="@id/btnMapa"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="35dp"
-            android:layout_toRightOf="@+id/Agendamento"
+            android:layout_toRightOf="@+id/btnAgendamento"
             android:background="@android:color/white"
             android:scaleType="fitEnd"
             app:srcCompat="@drawable/ic_history" />

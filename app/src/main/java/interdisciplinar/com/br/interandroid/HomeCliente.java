@@ -37,7 +37,6 @@ public class HomeCliente extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         btnMapa = (ImageButton) findViewById(R.id.btnMapa);
-
         btnMapa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,6 +45,13 @@ public class HomeCliente extends AppCompatActivity {
             }
         });
 
+        btnBuscar = (ImageButton) findViewById(R.id.btnBuscar);
+        btnBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeCliente.this, BuscaEmpresas.class));
+            }
+        });
     }
 
 

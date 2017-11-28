@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -29,7 +30,9 @@ import interdisciplinar.com.br.interandroid.model.Usuario;
 public class BuscaEmpresas extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private FirebaseAuth usuarioAutenticacao;
+    private FirebaseAuth autenticacao;
+    DatabaseReference referenciaFirebase;
+
 
     private List<Empresa> empresasList = new ArrayList<Empresa>();
     private ArrayAdapter<Empresa> arrayAdapterEmpresa;
@@ -40,7 +43,7 @@ public class BuscaEmpresas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca_empresas);
 
-        usuarioAutenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
         //ToolBar
         toolbar = (Toolbar) findViewById(R.id.toolbarTituloApp);
@@ -49,23 +52,26 @@ public class BuscaEmpresas extends AppCompatActivity {
 
         ListVDados = (ListView) findViewById(R.id.teste);
 
+
         eventoDataBase();
 
 
     }
 
     private void eventoDataBase() {
-        DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        referenciaFirebase = ConfiguracaoFirebase.getFirebase();
         referenciaFirebase.child("empresa").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                empresasList.clear();
+//                empresasList.clear();
                 for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     Empresa E = objSnapshot.getValue(Empresa.class);
                     empresasList.add(E);
                 }
                 arrayAdapterEmpresa = new ArrayAdapter<Empresa>(BuscaEmpresas.this, R.layout.activity_busca_empresas);
                 ListVDados.setAdapter(arrayAdapterEmpresa);
+                Log.i("Renato", String.valueOf(empresasList));
             }
 
             @Override
@@ -95,7 +101,7 @@ public class BuscaEmpresas extends AppCompatActivity {
     }
 
     public void deslogarUsuario(){
-        usuarioAutenticacao.signOut();
+        autenticacao.signOut();
         Intent intent = new Intent(BuscaEmpresas.this, MainActivity.class);
         startActivity(intent);
         finish();

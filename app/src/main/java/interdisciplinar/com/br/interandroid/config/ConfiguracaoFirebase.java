@@ -14,7 +14,7 @@ public final class ConfiguracaoFirebase {
         if (referenciaFirebase == null) {
 
             referenciaFirebase = FirebaseDatabase.getInstance().getReference();
-            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+//            FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         }
 
         return referenciaFirebase;

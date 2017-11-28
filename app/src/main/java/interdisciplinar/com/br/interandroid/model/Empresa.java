@@ -1,5 +1,6 @@
 package interdisciplinar.com.br.interandroid.model;
 
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -59,6 +60,7 @@ public class Empresa {
 
     public String getTxtEmailCadastro() {
         return txtEmailCadastro;
+
     }
 
     public void setTxtEmailCadastro(String txtEmailCadastro) {

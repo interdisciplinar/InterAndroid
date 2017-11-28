@@ -46,10 +46,12 @@ public class Usuario {
         referenciaFirebase.child("usuarios").child(getId()).setValue(this);
     }
 
+    @Exclude
     public String getId() {
         return id;
     }
 
+    @Exclude
     public void setId(String id) {
         this.id = id;
     }
@@ -61,11 +63,12 @@ public class Usuario {
     public void setTxtEmailCadastro(String txtEmailCadastro) {
         this.txtEmailCadastro = txtEmailCadastro;
     }
-
+    @Exclude
     public String getTxtSenhaCadastro() {
         return txtSenhaCadastro;
     }
 
+    @Exclude
     public void setTxtSenhaCadastro(String txtSenhaCadastro) {
         this.txtSenhaCadastro = txtSenhaCadastro;
     }

@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
 
@@ -47,11 +48,11 @@ public class Empresa {
         DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
         referenciaFirebase.child("empresa").child(getId()).setValue(this);
     }
-
+    @Exclude
     public String getId() {
         return id;
     }
-
+    @Exclude
     public void setId(String id) {
         this.id = id;
     }
@@ -63,11 +64,11 @@ public class Empresa {
     public void setTxtEmailCadastro(String txtEmailCadastro) {
         this.txtEmailCadastro = txtEmailCadastro;
     }
-
+    @Exclude
     public String getTxtSenhaCadastro() {
         return txtSenhaCadastro;
     }
-
+    @Exclude
     public void setTxtSenhaCadastro(String txtSenhaCadastro) {
         this.txtSenhaCadastro = txtSenhaCadastro;
     }

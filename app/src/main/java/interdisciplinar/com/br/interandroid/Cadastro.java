@@ -283,6 +283,7 @@ public class Cadastro extends AppCompatActivity {
 
                 cadastrarUsuario();
 
+
             }
         });
 
@@ -334,14 +335,19 @@ public class Cadastro extends AppCompatActivity {
                 empresa.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
                 empresa.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
                 empresa.setPerfil(perfil);
-                if (Servico1.isSelected()) {
+
+                if (Servico1.isChecked()) {
                     servico1 = "Sim";
-                    empresa.setServico1(servico1);
                 }
-                if (Servico2.isSelected()) {
+                else servico1 = "Não";
+                if (Servico2.isChecked()) {
                     servico2 = "Sim";
-                    empresa.setServico2(servico2);
-                }
+                }else servico2 = "Não";
+                empresa.setServico1(servico1);
+
+                empresa.setServico2(servico2);
+
+                cadastrarEmpresa();
             }
         });
     }
@@ -372,7 +378,7 @@ public class Cadastro extends AppCompatActivity {
                     FirebaseUser usuarioFirebase = task.getResult().getUser();
                     usuario.setId(usuarioFirebase.getUid());
                     usuario.salvar();
-
+                    abrirTelaPrincipalCliente();
                 } else {
 
                     try {
@@ -397,4 +403,58 @@ public class Cadastro extends AppCompatActivity {
         Log.i("Inter", "fim: " + usuario.getTxtSenhaCadastro());
     }
 
+
+    private void cadastrarEmpresa() {
+        Log.i("Inter", "email: " + usuario.getTxtEmailCadastro());
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        autenticacao.createUserWithEmailAndPassword(
+                empresa.getTxtEmailCadastro(),
+                empresa.getTxtSenhaCadastro()
+        ).addOnCompleteListener(Cadastro.this, new OnCompleteListener<AuthResult>() {
+
+
+            @Override
+
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                Log.i("Inter", "entra complet: ");
+                if (task.isSuccessful()) {
+                    Toast.makeText(Cadastro.this, getString(R.string.sucessoCadastro), Toast.LENGTH_SHORT).show();
+
+                    FirebaseUser usuarioFirebase = task.getResult().getUser();
+                    empresa.setId(usuarioFirebase.getUid());
+                    empresa.salvar();
+                    abrirTelaPrincipalEmpresa();
+                } else {
+
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        msgErro = getString(R.string.senhaFraca);
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        msgErro = getString(R.string.emailInvalido);
+                    } catch (FirebaseAuthUserCollisionException e) {
+                        msgErro = getString(R.string.usuarioExixtente);
+                    } catch (Exception e) {
+                        msgErro = getString(R.string.erroEfetuarCadastro);
+                        e.printStackTrace();
+                    }
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+
+                }
+
+            }
+        });
+    }
+
+    private void abrirTelaPrincipalCliente() {
+            Intent intent = new Intent(Cadastro.this, HomeCliente.class);
+            startActivity(intent);
+            finish();
+    }
+
+    private void abrirTelaPrincipalEmpresa() {
+        Intent intent = new Intent(Cadastro.this, HomeEmpresa.class);
+        startActivity(intent);
+        finish();
+    }
 }

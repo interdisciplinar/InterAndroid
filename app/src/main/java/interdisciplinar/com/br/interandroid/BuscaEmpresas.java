@@ -33,9 +33,9 @@ public class BuscaEmpresas extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     DatabaseReference referenciaFirebase;
 
-
+    private List<String> nomeEmpresa = new ArrayList<String>();
     private List<Empresa> empresasList = new ArrayList<Empresa>();
-    private ArrayAdapter<Empresa> arrayAdapterEmpresa;
+    private ArrayAdapter<String> arrayAdapterEmpresa;
     private ListView ListVDados;
 
     @Override
@@ -64,12 +64,13 @@ public class BuscaEmpresas extends AppCompatActivity {
         referenciaFirebase.child("empresa").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                empresasList.clear();
+                empresasList.clear();
                 for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
                     Empresa E = objSnapshot.getValue(Empresa.class);
                     empresasList.add(E);
+                    nomeEmpresa.add(E.getTxtNomeEmpresa());
                 }
-                arrayAdapterEmpresa = new ArrayAdapter<Empresa>(BuscaEmpresas.this, R.layout.activity_busca_empresas);
+                arrayAdapterEmpresa = new ArrayAdapter<String>(BuscaEmpresas.this, R.layout.activity_lista_empersas, nomeEmpresa);
                 ListVDados.setAdapter(arrayAdapterEmpresa);
                 Log.i("Renato", String.valueOf(empresasList));
             }

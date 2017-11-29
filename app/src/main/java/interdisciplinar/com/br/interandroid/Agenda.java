@@ -53,12 +53,4 @@ public class Agenda extends AppCompatActivity {
             });
         }
 
-//TESTE JEAN   1
-
-//asdjfhasdhf
-//mais alguma coisa   1
-
-
-
-
 }

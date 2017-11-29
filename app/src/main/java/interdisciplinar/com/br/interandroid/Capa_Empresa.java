@@ -57,7 +57,4 @@ public class Capa_Empresa extends AppCompatActivity {
 
     }
 
-
-
-    //RenatoTestePorra
 }

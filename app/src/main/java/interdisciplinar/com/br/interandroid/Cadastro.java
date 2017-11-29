@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.github.rtoshiro.util.format.SimpleMaskFormatter;
@@ -53,6 +54,8 @@ public class Cadastro extends AppCompatActivity {
     private EditText txtCPFCliente;
     private EditText txtTelefoneCliente;
     private EditText txtCelularCliente;
+    private RadioGroup radioGrupoSexoCliente;
+    private RadioButton rbSexoCliente;
     private RadioButton rbMasculinoCliente;
     private RadioButton rbFemininoCliente;
     private String sexo;
@@ -190,6 +193,7 @@ public class Cadastro extends AppCompatActivity {
         txtCPFCliente = (EditText) findViewById(R.id.txtCPFCliente);
         txtTelefoneCliente = (EditText) findViewById(R.id.txtTelefoneCliente);
         txtCelularCliente = (EditText) findViewById(R.id.txtCelularCliente);
+        radioGrupoSexoCliente = (RadioGroup) findViewById(R.id.radioGrupoSexoCliente);
         rbMasculinoCliente = (RadioButton) findViewById(R.id.rbMasculinoCliente);
         rbFemininoCliente = (RadioButton) findViewById(R.id.rbFemininoCliente);
         ckBoxTermos = (CheckBox) findViewById(R.id.ckBoxTermos);
@@ -211,27 +215,44 @@ public class Cadastro extends AppCompatActivity {
         btnDadosCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                int sexoCliente = radioGrupoSexoCliente.getCheckedRadioButtonId();
+
                 if (txtPNomeCliente.getText().toString().isEmpty() ||
                         txtSNomeCliente.getText().toString().isEmpty() ||
                         txtCPFCliente.getText().toString().isEmpty() ||
-                        txtTelefoneCliente.getText().toString().isEmpty() ||
+//                        txtTelefoneCliente.getText().toString().isEmpty() ||
                         txtCelularCliente.getText().toString().isEmpty()) {
 
                     msgErro = getString(R.string.campoNaoPreenchido);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+
+                } else if (sexoCliente < 0) {
+                    msgErro = getString(R.string.semSexo);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+
+                } else if (!ckBoxTermos.isChecked()) {
+                    msgErro = getString(R.string.AceiteTermos);
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
 
                 } else {
                     if (rbMasculinoCliente.isChecked()) {
                         sexo = rbMasculinoCliente.getText().toString();
 
-                    } else if (rbFemininoCliente.isChecked()) {
-                        sexo = rbFemininoCliente.getText().toString();
                     } else {
-                        msgErro = getString(R.string.semSexo);
-                        MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+                        sexo = rbFemininoCliente.getText().toString();
                     }
+                    termos = "Aceito";
                     dadosCliente.setVisibility(View.INVISIBLE);
                     enderecoCliente.setVisibility(View.VISIBLE);
+//                    Log.i("inter", sexo);
+//                    Log.i("inter", termos);
+//                    Log.i("inter", txtPNomeCliente.getText().toString());
+//                    Log.i("inter", txtSNomeCliente.getText().toString());
+//                    Log.i("inter", txtCPFCliente.getText().toString());
+//                    Log.i("inter", txtTelefoneCliente.getText().toString());
+//                    Log.i("inter", txtCelularCliente.getText().toString());
+
                 }
             }
         });
@@ -247,43 +268,50 @@ public class Cadastro extends AppCompatActivity {
         txtPais = (EditText) findViewById(R.id.txtPais);
         btnSaveCliente = (Button) findViewById(R.id.btnSaveCliente);
 
+        //Máscara de CEP
+        SimpleMaskFormatter simpleMaskCEP = new SimpleMaskFormatter("NNNNN-NNN");
+        MaskTextWatcher maskCEP = new MaskTextWatcher(txtCEPCliente, simpleMaskCEP);
+        txtCEPCliente.addTextChangedListener(maskCEP);
+
         btnSaveCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                usuario.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
-                usuario.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
-                usuario.setPerfil(perfil);
 
-                usuario.setTxtPNomeCliente(txtPNomeCliente.getText().toString());
-                usuario.setTxtPNomeCliente(txtSNomeCliente.getText().toString());
-                usuario.setTxtCPFCliente(txtCPFCliente.getText().toString());
-                usuario.setTxtTelefoneCliente(txtTelefoneCliente.getText().toString());
-                usuario.setTxtCelularCliente(txtCelularCliente.getText().toString());
-                usuario.setSexo(sexo);
-                usuario.setTermos(termos);
-
-                usuario.setTxtCEPCliente(txtCEPCliente.getText().toString());
-                usuario.setTxtEndereco(txtEndereco.getText().toString());
-                usuario.setTxtNumero(txtNumero.getText().toString());
-                usuario.setTxtComplemento(txtComplemento.getText().toString());
-                usuario.setTxtBairro(txtBairro.getText().toString());
-                usuario.setTxtCidade(txtCidade.getText().toString());
-                usuario.setTxtEstado(txtEstado.getText().toString());
-                usuario.setTxtPais(txtPais.getText().toString());
-
-
-                usuario.setSexo(sexo);
-                if (ckBoxTermos.isChecked()) {
-                    termos = "Aceito";
+                if (txtCEPCliente.getText().toString().isEmpty() ||
+                        txtEndereco.getText().toString().isEmpty() ||
+                        txtNumero.getText().toString().isEmpty() ||
+                        txtComplemento.getText().toString().isEmpty() ||
+                        txtBairro.getText().toString().isEmpty() ||
+                        txtCidade.getText().toString().isEmpty() ||
+                        txtEstado.getText().toString().isEmpty() ||
+                        txtPais.getText().toString().isEmpty()) {
+                    msgErro = getString(R.string.campoNaoPreenchido);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
                 } else {
-                    //termos = "";
-                    Toast.makeText(Cadastro.this, getString(R.string.AceiteTermos), Toast.LENGTH_LONG).show();
+                    usuario.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
+                    usuario.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
+                    usuario.setPerfil(perfil);
+
+                    usuario.setTxtPNomeCliente(txtPNomeCliente.getText().toString());
+                    usuario.setTxtPNomeCliente(txtSNomeCliente.getText().toString());
+                    usuario.setTxtCPFCliente(txtCPFCliente.getText().toString());
+                    usuario.setTxtTelefoneCliente(txtTelefoneCliente.getText().toString());
+                    usuario.setTxtCelularCliente(txtCelularCliente.getText().toString());
+                    usuario.setSexo(sexo);
+                    usuario.setTermos(termos);
+
+                    usuario.setTxtCEPCliente(txtCEPCliente.getText().toString());
+                    usuario.setTxtEndereco(txtEndereco.getText().toString());
+                    usuario.setTxtNumero(txtNumero.getText().toString());
+                    usuario.setTxtComplemento(txtComplemento.getText().toString());
+                    usuario.setTxtBairro(txtBairro.getText().toString());
+                    usuario.setTxtCidade(txtCidade.getText().toString());
+                    usuario.setTxtEstado(txtEstado.getText().toString());
+                    usuario.setTxtPais(txtPais.getText().toString());
+                    usuario.setSexo(sexo);
+
+                    cadastrarUsuario();
                 }
-                usuario.setTermos(termos);
-
-                cadastrarUsuario();
-
-
             }
         });
 
@@ -338,11 +366,10 @@ public class Cadastro extends AppCompatActivity {
 
                 if (Servico1.isChecked()) {
                     servico1 = "Sim";
-                }
-                else servico1 = "Não";
+                } else servico1 = "Não";
                 if (Servico2.isChecked()) {
                     servico2 = "Sim";
-                }else servico2 = "Não";
+                } else servico2 = "Não";
                 empresa.setServico1(servico1);
 
                 empresa.setServico2(servico2);
@@ -447,9 +474,9 @@ public class Cadastro extends AppCompatActivity {
     }
 
     private void abrirTelaPrincipalCliente() {
-            Intent intent = new Intent(Cadastro.this, HomeCliente.class);
-            startActivity(intent);
-            finish();
+        Intent intent = new Intent(Cadastro.this, HomeCliente.class);
+        startActivity(intent);
+        finish();
     }
 
     private void abrirTelaPrincipalEmpresa() {

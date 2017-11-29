@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -55,6 +57,17 @@ public class BuscaEmpresas extends AppCompatActivity {
 
         eventoDataBase();
 
+        ListVDados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent intent = new Intent(BuscaEmpresas.this, Capa_Empresa.class);
+                intent.putExtra("nomeEmpresa", nomeEmpresa.get(i));
+                startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -69,6 +82,7 @@ public class BuscaEmpresas extends AppCompatActivity {
                     Empresa E = objSnapshot.getValue(Empresa.class);
                     empresasList.add(E);
                     nomeEmpresa.add(E.getTxtNomeEmpresa());
+
                 }
                 arrayAdapterEmpresa = new ArrayAdapter<String>(BuscaEmpresas.this, R.layout.activity_lista_empersas, nomeEmpresa);
                 ListVDados.setAdapter(arrayAdapterEmpresa);
@@ -81,6 +95,8 @@ public class BuscaEmpresas extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -106,6 +122,5 @@ public class BuscaEmpresas extends AppCompatActivity {
         Intent intent = new Intent(BuscaEmpresas.this, MainActivity.class);
         startActivity(intent);
         finish();
-
     }
 }

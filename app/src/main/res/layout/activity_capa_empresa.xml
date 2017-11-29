@@ -28,25 +28,21 @@
                 android:id="@+id/NomeEmpresa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buscar nome da empres do Banco de Dados"
                 android:textSize="@dimen/txtTituloValue"/>
             <TextView
                 android:id="@+id/ProprietarioEmpresa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buscar propeietario da empres do BD"
                 android:textSize="@dimen/txtValue"/>
             <TextView
                 android:id="@+id/TelefoneEmpresa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buscar telefone da empres do BD"
                 android:textSize="@dimen/txtValue"/>
             <TextView
                 android:id="@+id/EnderecoEmpresa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Buscar endereço da empres do BD"
                 android:textSize="@dimen/txtValue"/>
         </LinearLayout>
     </LinearLayout>

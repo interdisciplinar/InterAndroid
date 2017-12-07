@@ -1,7 +1,9 @@
 package interdisciplinar.com.br.interandroid;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,9 +11,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
@@ -38,7 +44,8 @@ public class Capa_Empresa extends AppCompatActivity {
     private TextView ProprietarioEmpresa;
     private TextView TelefoneEmpresa;
     private TextView EnderecoEmpresa;
-    private Button Agenda;
+    private Button btnAgenda;
+    private String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +70,40 @@ public class Capa_Empresa extends AppCompatActivity {
 
         eventoDataBase();
 
-        Agenda  = (Button) findViewById(R.id.btnAgenda);
+        btnAgenda  = (Button) findViewById(R.id.btnAgenda);
+        btnAgenda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Capa_Empresa.this, Agenda.class);
+                //startActivity(intent);
 
+                final Dialog dialog = new Dialog(Capa_Empresa.this);
+                dialog.setContentView(R.layout.activity_agenda);
+                dialog.setTitle("Calendario");
+
+                DatePicker datePicker = (DatePicker) dialog.findViewById(R.id.Calendar);
+
+
+                Calendar datainicio = Calendar.getInstance();
+                datePicker.init(
+                        datainicio.get(Calendar.YEAR),
+                        datainicio.get(Calendar.MONTH),
+                        datainicio.get(Calendar.DAY_OF_MONTH),
+                        new DatePicker.OnDateChangedListener(){
+                            @Override
+                            public void onDateChanged(DatePicker view,
+                                                      int ano, int mesDoAno,int diaDoMes) {
+//                                Toast.makeText(Capa_Empresa.this,
+//                                        "Ano: " + ano + "\n" +
+//                                                "Mes: " + mesDoAno + "\n" +
+//                                                "Dia: " + diaDoMes, Toast.LENGTH_LONG).show();
+                                data = diaDoMes + "/"+ mesDoAno +"/"+ ano;
+                                dialog.dismiss();
+                            }});
+                dialog.show();
+
+            }
+        });
     }
 
     private void eventoDataBase() {

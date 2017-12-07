@@ -1,8 +1,11 @@
 package interdisciplinar.com.br.interandroid;
 
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +33,9 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
+import org.json.JSONObject;
+
+import interdisciplinar.com.br.interandroid.WebService.WebServicesJSON;
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
 import interdisciplinar.com.br.interandroid.helper.MsgDialog;
 import interdisciplinar.com.br.interandroid.model.Empresa;
@@ -273,6 +279,20 @@ public class Cadastro extends AppCompatActivity {
         MaskTextWatcher maskCEP = new MaskTextWatcher(txtCEPCliente, simpleMaskCEP);
         txtCEPCliente.addTextChangedListener(maskCEP);
 
+        //WebService consulta CEP
+        txtCEPCliente.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                String cep = txtCEPCliente.getText().toString();
+                if (cep.length() > 7) {
+                    cep = cep.replace("-", "");
+                    lerJSON l = new lerJSON(Cadastro.this, cep);
+                    l.execute("");
+                }
+
+            }
+        });
+
         btnSaveCliente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -483,5 +503,90 @@ public class Cadastro extends AppCompatActivity {
         Intent intent = new Intent(Cadastro.this, HomeEmpresa.class);
         startActivity(intent);
         finish();
+    }
+
+
+    public class lerJSON extends AsyncTask<String, Void, String> {
+
+        private ProgressDialog dialog;
+        private String CEP;
+        private JSONObject jsonObject;
+        public Usuario u;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//			if (contexto != null){
+            dialog = new ProgressDialog(contexto);
+
+            dialog.setMessage("Aguarde, atualizando mensagens");
+            dialog.show();
+//			}
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // TODO Auto-generated method stub
+            txtEndereco = (EditText) findViewById(R.id.txtEndereco);
+            txtComplemento = (EditText) findViewById(R.id.txtComplemento);
+            txtBairro = (EditText) findViewById(R.id.txtBairro);
+            txtCidade = (EditText) findViewById(R.id.txtCidade);
+            txtEstado = (EditText) findViewById(R.id.txtEstado);
+
+
+            txtEndereco.setText(u.getTxtEndereco());
+            txtBairro.setText(u.getTxtBairro());
+            txtComplemento.setText(u.getTxtComplemento());
+            txtBairro.setText(u.getTxtBairro());
+            txtCidade.setText(u.getTxtCidade());
+            txtEstado.setText(u.getTxtEstado());
+
+            dialog.dismiss();
+        }
+
+        public lerJSON() {
+            super();
+        }
+
+        public lerJSON(Context contexto, String CEP) {
+            super();
+            setContexto(contexto);
+            this.CEP = CEP;
+        }
+
+        private Context contexto;
+
+        public Context getContexto() {
+            return contexto;
+        }
+
+        public void setContexto(Context contexto) {
+            this.contexto = contexto;
+        }
+
+        @Override
+        protected String doInBackground(String... arg0) {
+
+            try {
+                WebServicesJSON c = new WebServicesJSON();
+                String url = "https://viacep.com.br/ws/"+CEP+"/json/";
+                Log.i("Unifebe", url);
+                jsonObject = c.processarRETORNOJSON(c.consultaDadosWEB(url));
+
+                this.u = new Usuario();
+                this.u.setTxtEndereco(jsonObject.getString("logradouro"));
+                this.u.setTxtComplemento(jsonObject.getString("complemento"));
+                this.u.setTxtBairro(jsonObject.getString("bairro"));
+                this.u.setTxtCidade(jsonObject.getString("localidade"));
+                this.u.setTxtEstado(jsonObject.getString("uf"));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                // TODO: handle exception
+            }
+
+            return null;
+        }
+
     }
 }

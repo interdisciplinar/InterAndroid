@@ -101,13 +101,16 @@ public class WebServicesJSON {
     }
 
 
-    public void processarRETORNOJSON(String retorno) throws JSONException {
-        Log.i("Retorno", "Retorno = "+retorno);
+    public JSONObject processarRETORNOJSON(String retorno) throws JSONException {
+        //Log.i("Retorno", "Retorno = "+retorno);
+
 
         JSONObject jsonObject = new JSONObject(retorno);
-        Log.i("ibge" , jsonObject.getString("ibge"));
-        Log.i("uf" , jsonObject.getString("UF"));
-        Log.i("bairro" , jsonObject.getString("bairro"));
+        return jsonObject;
+
+//        Log.i("ibge" , jsonObject.getString("ibge"));
+//        Log.i("uf" , jsonObject.getString("UF"));
+//        Log.i("bairro" , jsonObject.getString("bairro"));
 
     }
 
@@ -138,5 +141,7 @@ public class WebServicesJSON {
             }
         }*/
     }
+
+
 
 }

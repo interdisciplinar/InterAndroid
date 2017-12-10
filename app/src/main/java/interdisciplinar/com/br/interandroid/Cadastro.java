@@ -346,8 +346,19 @@ public class Cadastro extends AppCompatActivity {
         btnDadosEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dadosEmpresa.setVisibility(View.INVISIBLE);
-                enderecoEmpresa.setVisibility(View.VISIBLE);
+
+                if (txtNomeEmpresa.getText().toString().isEmpty() ||
+                        txtNomeProprietarioEmpresa.getText().toString().isEmpty() ||
+                        txtCNPJ.getText().toString().isEmpty() ||
+//                        txtTelefoneEmpresa.getText().toString().isEmpty() ||
+                        txtCelularEmpresa.getText().toString().isEmpty()) {
+
+                    msgErro = getString(R.string.campoNaoPreenchido);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+                } else {
+                    dadosEmpresa.setVisibility(View.INVISIBLE);
+                    enderecoEmpresa.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -367,11 +378,30 @@ public class Cadastro extends AppCompatActivity {
         btnCadastrarEmpresa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//********************************
+                if (txtCEPEmpresa.getText().toString().isEmpty() ||
+                        txtEnderecoEmpresa.getText().toString().isEmpty() ||
+                        txtNumeroEmpresa.getText().toString().isEmpty() ||
+                        txtComplementoEmpresa.getText().toString().isEmpty() ||
+                        txtBairroEmpresa.getText().toString().isEmpty() ||
+                        txtCidadeEmpresa.getText().toString().isEmpty() ||
+                        txtEstadoEmpresa.getText().toString().isEmpty() ||
+                        txtPaisEmpresa.getText().toString().isEmpty()) {
+
+                    msgErro = getString(R.string.campoNaoPreenchido);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+                }
+//****************************
+                empresa.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
+                empresa.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
+                empresa.setPerfil(perfil);
+
                 empresa.setTxtNomeEmpresa(txtNomeEmpresa.getText().toString());
                 empresa.setTxtNomeProprietarioEmpresa(txtNomeProprietarioEmpresa.getText().toString());
                 empresa.setTxtCNPJ(txtCNPJ.getText().toString());
                 empresa.setTxtTelefoneEmpresa(txtTelefoneEmpresa.getText().toString());
                 empresa.setTxtCelularEmpresa(txtCelularEmpresa.getText().toString());
+
                 empresa.setTxtCEPEmpresa(txtCEPEmpresa.getText().toString());
                 empresa.setTxtEnderecoEmpresa(txtEnderecoEmpresa.getText().toString());
                 empresa.setTxtNumeroEmpresa(txtNumeroEmpresa.getText().toString());
@@ -380,9 +410,7 @@ public class Cadastro extends AppCompatActivity {
                 empresa.setTxtCidadeEmpresa(txtCidadeEmpresa.getText().toString());
                 empresa.setTxtEstadoEmpresa(txtEstadoEmpresa.getText().toString());
                 empresa.setTxtPaisEmpresa(txtPaisEmpresa.getText().toString());
-                empresa.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
-                empresa.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
-                empresa.setPerfil(perfil);
+
 
                 if (Servico1.isChecked()) {
                     servico1 = "Sim";
@@ -391,7 +419,6 @@ public class Cadastro extends AppCompatActivity {
                     servico2 = "Sim";
                 } else servico2 = "Não";
                 empresa.setServico1(servico1);
-
                 empresa.setServico2(servico2);
 
                 cadastrarEmpresa();

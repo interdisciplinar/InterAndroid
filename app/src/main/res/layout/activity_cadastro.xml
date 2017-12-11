@@ -280,12 +280,12 @@
                     android:inputType="text"
                     android:maxLength="2" />
 
-                <EditText
-                    android:id="@+id/txtPais"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/Pais"
-                    android:inputType="text" />
+                <!--<EditText-->
+                    <!--android:id="@+id/txtPais"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/Pais"-->
+                    <!--android:inputType="text" />-->
 
                 <Button
                     android:id="@+id/btnSaveCliente"
@@ -437,12 +437,12 @@
                     android:inputType="text"
                     android:maxLength="2" />
 
-                <EditText
-                    android:id="@+id/txtPaisEmpresa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/Pais"
-                    android:inputType="text" />
+                <!--<EditText-->
+                    <!--android:id="@+id/txtPaisEmpresa"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="@string/Pais"-->
+                    <!--android:inputType="text" />-->
 
                 <TextView
                     android:layout_width="wrap_content"

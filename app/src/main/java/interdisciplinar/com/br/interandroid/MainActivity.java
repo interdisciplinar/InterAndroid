@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void abrirTelaPrincipal() {
-        Intent intent = new Intent(MainActivity.this, HomeCliente.class);
+        Intent intent = new Intent(MainActivity.this, HomeEmpresa.class);
         startActivity(intent);
         finish();
     }

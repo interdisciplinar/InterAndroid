@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/Fundo_Branco"
+    android:orientation="vertical"
+    >
+
+    <include
+        android:id="@+id/toolbarTituloApp"
+        layout="@layout/toolbar"
+        />
+
+
+        <EditText
+            android:id="@+id/txtHoraInicial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:ems="12"
+            android:hint="@string/HoraInicial"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/Fonte"
+            />
+
+        <EditText
+            android:id="@+id/txtHoraFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="12"
+            android:hint="@string/HoraFinal"
+            android:textColor="@color/Fonte"
+            />
+
+    <EditText
+        android:id="@+id/txtTempoAtendimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="12"
+        android:hint="@string/TempoAtendimento"
+        android:textColor="@color/Fonte"
+        />
+
+    <Button
+        android:id="@+id/btnSalvar"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Salvar" />
+
+
+</LinearLayout>

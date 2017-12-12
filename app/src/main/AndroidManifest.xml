@@ -45,7 +45,8 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".BuscaEmpresas"></activity>
+        <activity android:name=".BuscaEmpresas" />
+        <activity android:name=".HorariosFuncionamento"></activity>
     </application>
 
 </manifest>

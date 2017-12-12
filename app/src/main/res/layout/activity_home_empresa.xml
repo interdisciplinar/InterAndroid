@@ -1,11 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="@color/Fundo_Branco">
+    android:background="@color/Fundo_Branco"
+    android:orientation="vertical"
+
+    >
+
+    <include
+        android:id="@+id/toolbarTituloApp"
+        layout="@layout/toolbar"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbarTituloApp"
+        android:gravity="center">
 
 
+        <ImageButton
+            android:id="@+id/btnAgendados"
+            android:layout_width="@dimen/botaoHome"
+            android:layout_height="@dimen/botaoHome"
+            android:background="@android:color/white"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/ic_agendaw"
 
-</LinearLayout>
+            />
+
+        <ImageButton
+            android:id="@+id/btnListaNegra"
+            android:layout_width="@dimen/botaoHome"
+            android:layout_height="@dimen/botaoHome"
+            android:layout_below="@+id/btnAgendados"
+            android:layout_marginTop="35dp"
+            android:background="@android:color/white"
+            android:scaleType="fitEnd"
+            android:tint="@android:drawable/screen_background_dark_transparent"
+            app:srcCompat="@drawable/black_list2" />
+
+        <ImageButton
+            android:id="@+id/btnAtualizarDados"
+            android:layout_width="@dimen/botaoHome"
+            android:layout_height="@dimen/botaoHome"
+            android:layout_marginLeft="35dp"
+            android:layout_toRightOf="@+id/btnAgendados"
+            android:background="@android:color/white"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/atualizar" />
+
+        <ImageButton
+            android:id="@+id/btnRecentes"
+            android:layout_width="@dimen/botaoHome"
+            android:layout_height="@dimen/botaoHome"
+            android:layout_below="@id/btnAgendados"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="35dp"
+            android:layout_toRightOf="@+id/btnListaNegra"
+            android:background="@android:color/white"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/horarios" />
+
+    </RelativeLayout>
+</RelativeLayout>

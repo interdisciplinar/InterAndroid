@@ -57,6 +57,9 @@
     <string name="AceiteTermos">Você não aceitou os termos!</string>
     <string name="campoNaoPreenchido">Algum campo de dados pessoais não foi preenchido</string>
     <string name="Proprietario">Proprietario: </string>
+    <string name="HoraInicial">Hora Inicial</string>
+    <string name="HoraFinal">Hora Final</string>
+    <string name="TempoAtendimento">Tempo de Atendimento</string>
 
     <string-array name="Servicos">
         <item>Pé e mão</item>

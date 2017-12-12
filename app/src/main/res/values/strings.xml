@@ -60,6 +60,10 @@
     <string name="HoraInicial">Hora Inicial</string>
     <string name="HoraFinal">Hora Final</string>
     <string name="TempoAtendimento">Tempo de Atendimento</string>
+    <string name="nenhumServicoSelecionado">Nenhum serviço foi selecionado</string>
+    <string name="carregando">Aguarde, atualizando campos</string>
+    <string name="ok">OK</string>
+    <string name="voltar">Voltar</string>
 
     <string-array name="Servicos">
         <item>Pé e mão</item>

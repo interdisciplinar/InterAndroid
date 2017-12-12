@@ -61,7 +61,6 @@ public class Cadastro extends AppCompatActivity {
     private EditText txtTelefoneCliente;
     private EditText txtCelularCliente;
     private RadioGroup radioGrupoSexoCliente;
-    private RadioButton rbSexoCliente;
     private RadioButton rbMasculinoCliente;
     private RadioButton rbFemininoCliente;
     private String sexo;
@@ -249,14 +248,6 @@ public class Cadastro extends AppCompatActivity {
                     termos = "Aceito";
                     dadosCliente.setVisibility(View.INVISIBLE);
                     enderecoCliente.setVisibility(View.VISIBLE);
-//                    Log.i("inter", sexo);
-//                    Log.i("inter", termos);
-//                    Log.i("inter", txtPNomeCliente.getText().toString());
-//                    Log.i("inter", txtSNomeCliente.getText().toString());
-//                    Log.i("inter", txtCPFCliente.getText().toString());
-//                    Log.i("inter", txtTelefoneCliente.getText().toString());
-//                    Log.i("inter", txtCelularCliente.getText().toString());
-
                 }
             }
         });
@@ -276,15 +267,15 @@ public class Cadastro extends AppCompatActivity {
         MaskTextWatcher maskCEP = new MaskTextWatcher(txtCEPCliente, simpleMaskCEP);
         txtCEPCliente.addTextChangedListener(maskCEP);
 
-        //WebService consulta CEP
+        //WebService consulta CEP Cliente
         txtCEPCliente.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 String cep = txtCEPCliente.getText().toString();
-                if (cep.length() > 7) {
+                if (cep.length() > 8) {
                     cep = cep.replace("-", "");
-                    lerJSON l = new lerJSON(Cadastro.this, cep);
-                    l.execute("");
+                    lerJSONUsuario lu = new lerJSONUsuario(Cadastro.this, cep);
+                    lu.execute("");
                 }
 
             }
@@ -355,7 +346,7 @@ public class Cadastro extends AppCompatActivity {
                 if (txtNomeEmpresa.getText().toString().isEmpty() ||
                         txtNomeProprietarioEmpresa.getText().toString().isEmpty() ||
                         txtCNPJ.getText().toString().isEmpty() ||
-                        txtTelefoneEmpresa.getText().toString().isEmpty() ||
+//                        txtTelefoneEmpresa.getText().toString().isEmpty() ||
                         txtCelularEmpresa.getText().toString().isEmpty()) {
                     msgErro = getString(R.string.campoNaoPreenchido);
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
@@ -384,15 +375,15 @@ public class Cadastro extends AppCompatActivity {
         MaskTextWatcher maskCEPEmpresa = new MaskTextWatcher(txtCEPEmpresa, simpleMaskCEPEmpresa);
         txtCEPEmpresa.addTextChangedListener(maskCEPEmpresa);
 
-        //WebService consulta CEP
+        //WebService consulta CEP Empresa
         txtCEPEmpresa.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                String cep = txtCEPEmpresa.getText().toString();
-                if (cep.length() > 7) {
-                    cep = cep.replace("-", "");
-                    lerJSON l = new lerJSON(Cadastro.this, cep);
-                    l.execute("");
+                String cepEmp = txtCEPEmpresa.getText().toString();
+                if (cepEmp.length() > 8) {
+                    cepEmp = cepEmp.replace("-", "");
+                    lerJSONEmpresa le = new lerJSONEmpresa(Cadastro.this, cepEmp);
+                    le.execute("");
                 }
 
             }
@@ -412,40 +403,41 @@ public class Cadastro extends AppCompatActivity {
 
                     msgErro = getString(R.string.campoNaoPreenchido);
                     MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
-                } else {
+                } else if (!Servico1.isChecked() && !Servico2.isChecked()) {
+
+                    msgErro = getString(R.string.nenhumServicoSelecionado);
+                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
                     //Continuar desta parte.
+                } else {
+                    empresa.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
+                    empresa.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
+                    empresa.setPerfil(perfil);
+
+                    empresa.setTxtNomeEmpresa(txtNomeEmpresa.getText().toString());
+                    empresa.setTxtNomeProprietarioEmpresa(txtNomeProprietarioEmpresa.getText().toString());
+                    empresa.setTxtCNPJ(txtCNPJ.getText().toString());
+                    empresa.setTxtTelefoneEmpresa(txtTelefoneEmpresa.getText().toString());
+                    empresa.setTxtCelularEmpresa(txtCelularEmpresa.getText().toString());
+
+                    empresa.setTxtCEPEmpresa(txtCEPEmpresa.getText().toString());
+                    empresa.setTxtEnderecoEmpresa(txtEnderecoEmpresa.getText().toString());
+                    empresa.setTxtNumeroEmpresa(txtNumeroEmpresa.getText().toString());
+                    empresa.setTxtComplementoEmpresa(txtComplementoEmpresa.getText().toString());
+                    empresa.setTxtBairroEmpresa(txtBairroEmpresa.getText().toString());
+                    empresa.setTxtCidadeEmpresa(txtCidadeEmpresa.getText().toString());
+                    empresa.setTxtEstadoEmpresa(txtEstadoEmpresa.getText().toString());
+
+                    if (Servico1.isChecked()) {
+                        servico1 = "Sim";
+                    } else servico1 = "Não";
+                    if (Servico2.isChecked()) {
+                        servico2 = "Sim";
+                    } else servico2 = "Não";
+                    empresa.setServico1(servico1);
+                    empresa.setServico2(servico2);
+
+                    cadastrarEmpresa();
                 }
-
-                empresa.setTxtEmailCadastro(txtEmailCadastro.getText().toString());
-                empresa.setTxtSenhaCadastro(txtSenhaCadastro.getText().toString());
-                empresa.setPerfil(perfil);
-
-                empresa.setTxtNomeEmpresa(txtNomeEmpresa.getText().toString());
-                empresa.setTxtNomeProprietarioEmpresa(txtNomeProprietarioEmpresa.getText().toString());
-                empresa.setTxtCNPJ(txtCNPJ.getText().toString());
-                empresa.setTxtTelefoneEmpresa(txtTelefoneEmpresa.getText().toString());
-                empresa.setTxtCelularEmpresa(txtCelularEmpresa.getText().toString());
-
-                empresa.setTxtCEPEmpresa(txtCEPEmpresa.getText().toString());
-                empresa.setTxtEnderecoEmpresa(txtEnderecoEmpresa.getText().toString());
-                empresa.setTxtNumeroEmpresa(txtNumeroEmpresa.getText().toString());
-                empresa.setTxtComplementoEmpresa(txtComplementoEmpresa.getText().toString());
-                empresa.setTxtBairroEmpresa(txtBairroEmpresa.getText().toString());
-                empresa.setTxtCidadeEmpresa(txtCidadeEmpresa.getText().toString());
-                empresa.setTxtEstadoEmpresa(txtEstadoEmpresa.getText().toString());
-
-
-                if (Servico1.isChecked()) {
-                    servico1 = "Sim";
-                } else servico1 = "Não";
-                if (Servico2.isChecked()) {
-                    servico2 = "Sim";
-                } else servico2 = "Não";
-                empresa.setServico1(servico1);
-
-                empresa.setServico2(servico2);
-
-                cadastrarEmpresa();
             }
         });
     }
@@ -458,7 +450,7 @@ public class Cadastro extends AppCompatActivity {
     }
 
     private void cadastrarUsuario() {
-        Log.i("Inter", "email: " + usuario.getTxtEmailCadastro());
+//        Log.i("Inter", "email: " + usuario.getTxtEmailCadastro());
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
                 usuario.getTxtEmailCadastro(),
@@ -491,7 +483,7 @@ public class Cadastro extends AppCompatActivity {
                         msgErro = getString(R.string.erroEfetuarCadastro);
                         e.printStackTrace();
                     }
-                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
+                    MsgDialog.msgErroCadastro(Cadastro.this, tituloErro, msgErro);
 
                 }
                 Log.i("Inter", "complet: " + usuario.getTxtSenhaCadastro());
@@ -503,7 +495,7 @@ public class Cadastro extends AppCompatActivity {
 
 
     private void cadastrarEmpresa() {
-        Log.i("Inter", "email: " + usuario.getTxtEmailCadastro());
+//        Log.i("Inter", "email: " + empresa.getTxtEmailCadastro());
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.createUserWithEmailAndPassword(
                 empresa.getTxtEmailCadastro(),
@@ -536,8 +528,7 @@ public class Cadastro extends AppCompatActivity {
                         msgErro = getString(R.string.erroEfetuarCadastro);
                         e.printStackTrace();
                     }
-                    MsgDialog.msgErro(Cadastro.this, tituloErro, msgErro);
-
+                    MsgDialog.msgErroCadastro(Cadastro.this, tituloErro, msgErro);
                 }
 
             }
@@ -557,7 +548,7 @@ public class Cadastro extends AppCompatActivity {
     }
 
 
-    public class lerJSON extends AsyncTask<String, Void, String> {
+    public class lerJSONUsuario extends AsyncTask<String, Void, String> {
 
         private ProgressDialog dialog;
         private String CEP;
@@ -570,7 +561,7 @@ public class Cadastro extends AppCompatActivity {
 //			if (contexto != null){
             dialog = new ProgressDialog(contexto);
 
-            dialog.setMessage("Aguarde, atualizando mensagens");
+            dialog.setMessage(getString(R.string.carregando));
             dialog.show();
 //			}
 
@@ -596,11 +587,11 @@ public class Cadastro extends AppCompatActivity {
             dialog.dismiss();
         }
 
-        public lerJSON() {
+        public lerJSONUsuario() {
             super();
         }
 
-        public lerJSON(Context contexto, String CEP) {
+        public lerJSONUsuario(Context contexto, String CEP) {
             super();
             setContexto(contexto);
             this.CEP = CEP;
@@ -631,6 +622,91 @@ public class Cadastro extends AppCompatActivity {
                 this.u.setTxtBairro(jsonObject.getString("bairro"));
                 this.u.setTxtCidade(jsonObject.getString("localidade"));
                 this.u.setTxtEstado(jsonObject.getString("uf"));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                // TODO: handle exception
+            }
+
+            return null;
+        }
+
+    }
+
+    public class lerJSONEmpresa extends AsyncTask<String, Void, String> {
+
+        private ProgressDialog dialog;
+        private String CEP;
+        private JSONObject jsonObject;
+        public Empresa e;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+//			if (contexto != null){
+            dialog = new ProgressDialog(contexto);
+
+            dialog.setMessage(getString(R.string.carregando));
+            dialog.show();
+//			}
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // TODO Auto-generated method stub
+            txtEnderecoEmpresa = (EditText) findViewById(R.id.txtEnderecoEmpresa);
+            txtComplementoEmpresa = (EditText) findViewById(R.id.txtComplementoEmpresa);
+            txtBairroEmpresa = (EditText) findViewById(R.id.txtBairroEmpresa);
+            txtCidadeEmpresa = (EditText) findViewById(R.id.txtCidadeEmpresa);
+            txtEstadoEmpresa = (EditText) findViewById(R.id.txtEstadoEmpresa);
+
+
+            txtEnderecoEmpresa.setText(e.getTxtEnderecoEmpresa());
+            txtBairroEmpresa.setText(e.getTxtBairroEmpresa());
+            txtComplementoEmpresa.setText(e.getTxtComplementoEmpresa());
+            txtBairroEmpresa.setText(e.getTxtBairroEmpresa());
+            txtCidadeEmpresa.setText(e.getTxtCidadeEmpresa());
+            txtEstadoEmpresa.setText(e.getTxtEstadoEmpresa());
+
+            dialog.dismiss();
+        }
+
+        public lerJSONEmpresa() {
+            super();
+        }
+
+        public lerJSONEmpresa(Context contexto, String CEP) {
+            super();
+            setContexto(contexto);
+            this.CEP = CEP;
+        }
+
+        private Context contexto;
+
+        public Context getContexto() {
+            return contexto;
+        }
+
+        public void setContexto(Context contexto) {
+            this.contexto = contexto;
+        }
+
+        @Override
+        protected String doInBackground(String... arg0) {
+
+            try {
+                WebServicesJSON c = new WebServicesJSON();
+                String url = "https://viacep.com.br/ws/" + CEP + "/json/";
+                Log.i("Unifebe", url);
+                jsonObject = c.processarRETORNOJSON(c.consultaDadosWEB(url));
+
+                this.e = new Empresa();
+                this.e.setTxtEnderecoEmpresa(jsonObject.getString("logradouro"));
+                this.e.setTxtComplementoEmpresa(jsonObject.getString("complemento"));
+                this.e.setTxtBairroEmpresa(jsonObject.getString("bairro"));
+                this.e.setTxtCidadeEmpresa(jsonObject.getString("localidade"));
+                this.e.setTxtEstadoEmpresa(jsonObject.getString("uf"));
 
             } catch (Exception e) {
                 e.printStackTrace();

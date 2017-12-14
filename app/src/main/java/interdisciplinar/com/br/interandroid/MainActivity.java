@@ -5,9 +5,11 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,9 +19,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import interdisciplinar.com.br.interandroid.config.ConfiguracaoFirebase;
 import interdisciplinar.com.br.interandroid.helper.MsgDialog;
+import interdisciplinar.com.br.interandroid.model.Empresa;
 import interdisciplinar.com.br.interandroid.model.Usuario;
 
 //import com.facebook.stetho.Stetho; //Para visualizar o banco SQLite no Google Chrome
@@ -34,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private String tituloErro;
     private String msgErro;
+    DatabaseReference referenciaFirebase;
 
 
     @Override
@@ -76,9 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     MsgDialog.msgErro(MainActivity.this, tituloErro, msgErro);
 
                 } else {
-
                     validarLogin();
-
                 }
             }
         });
@@ -98,11 +104,35 @@ public class MainActivity extends AppCompatActivity {
     private void verificarUsuarioLogado() {
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         if (autenticacao.getCurrentUser() != null) {
-            abrirTelaPrincipal();
+            referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+            referenciaFirebase.child("empresa").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    boolean  empresa = false;
+                    for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                        Empresa E = objSnapshot.getValue(Empresa.class);
+                        if (autenticacao.getCurrentUser().getEmail().equalsIgnoreCase(E.getTxtEmailCadastro())){
+                            empresa = true;
+                        }
+                    }
+                    if (!empresa) {
+                        abrirTelaPrincipal();
+                    } else {
+                        abrirTelaPrincipalEmpresa();
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
         }
     }
 
     private void validarLogin() {
+
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.signInWithEmailAndPassword(
                 usuario.getTxtEmailCadastro(),
@@ -111,7 +141,29 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    abrirTelaPrincipal();
+                    referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+                    referenciaFirebase.child("empresa").addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            boolean  empresa = false;
+                            for (DataSnapshot objSnapshot:dataSnapshot.getChildren()){
+                                Empresa E = objSnapshot.getValue(Empresa.class);
+                                if (email.getText().toString().equalsIgnoreCase(E.getTxtEmailCadastro())){
+                                    empresa = true;
+                                }
+                            }
+                            if (!empresa) {
+                                abrirTelaPrincipal();
+                            } else {
+                                abrirTelaPrincipalEmpresa();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
 //                    Toast.makeText(MainActivity.this, "Sucesso ao fazer Login", Toast.LENGTH_SHORT).show();
                 } else {
 
@@ -134,6 +186,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void abrirTelaPrincipal() {
+        Intent intent = new Intent(MainActivity.this, HomeCliente.class);
+        startActivity(intent);
+        finish();
+    }
+    private void abrirTelaPrincipalEmpresa() {
         Intent intent = new Intent(MainActivity.this, HomeEmpresa.class);
         startActivity(intent);
         finish();

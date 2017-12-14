@@ -44,7 +44,7 @@ public class HomeEmpresa extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(HomeEmpresa.this, MapsActivity.class));
+                //startActivity(new Intent(HomeEmpresa.this, MapsActivity.class));
             }
         });
         btnAtualizarDados = (ImageButton) findViewById(R.id.btnAtualizarDados);
